@@ -1,0 +1,56 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DebugType>pdbonly</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Xamarin.Forms" Version="3.1.0.697729" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Views\" />
+    <Folder Include="Behaviors\" />
+    <Folder Include="Models\" />
+    <Folder Include="TestData\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Views\MainPage.xaml.cs" />
+    <Compile Remove="Behaviors\NumericEntryBehavior.cs" />
+    <Compile Remove="Views\EditExpensePage.xaml.cs" />
+    <Compile Remove="CameraPage1.xaml.cs" />
+    <Compile Remove="Views\CameraPage.xaml.cs" />
+    <Compile Remove="Views\CategoriesPage.xaml.cs" />
+    <Compile Remove="Views\EntryPage.xaml.cs" />
+    <Compile Remove="Views\HomePage.xaml.cs" />
+    <Compile Remove="MemoryStoreEntry.cs" />
+    <Compile Remove="IEntryStore.cs" />
+    <Compile Remove="MockDataExtensionMethods.cs" />
+    <Compile Remove="Entry.cs" />
+    <Compile Remove="CameraPg.xaml.cs" />
+    <Compile Remove="TabbedViewController.xaml.cs" />
+    <Compile Remove="Views\EntriesPage.xaml.cs" />
+    <Compile Remove="ViewModels\CategoryViewModel.cs" />
+    <Compile Remove="TestData\ExpenseData.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Remove="Views\EditExpensePage.xaml" />
+    <EmbeddedResource Remove="CameraPage1.xaml" />
+    <EmbeddedResource Remove="Views\CameraPage.xaml" />
+    <EmbeddedResource Remove="Views\EntryPage.xaml" />
+    <EmbeddedResource Remove="Views\HomePage.xaml" />
+    <EmbeddedResource Remove="CameraPg.xaml" />
+    <EmbeddedResource Remove="TabbedViewController.xaml" />
+    <EmbeddedResource Remove="Views\EntriesPage.xaml" />
+  </ItemGroup>
+</Project>

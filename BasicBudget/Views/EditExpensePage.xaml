@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage 
+    xmlns="http://xamarin.com/schemas/2014/forms" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+    xmlns:local="clr-namespace:BasicBudget.Behaviors"
+    x:Class="BasicBudget.Views.EditExpensePage"
+    Title="Edit Expense Page"
+    > 
+    <ContentPage.Content>
+        <TableView Intent="Form" HasUnevenRows="true">
+            <TableView.Root>
+                <TableSection Title="Expense">
+                    <EntryCell Label="Category Name" HorizontalTextAlignment="End"/>
+                    <EntryCell Label="Expense Name" HorizontalTextAlignment="End"/>
+                    <EntryCell Label="Date" HorizontalTextAlignment="End"/>
+                    <ViewCell>
+                        <ContentView>
+                            <StackLayout Orientation="Horizontal">
+                                <Label Text="Expense Price" VerticalOptions="Center" />
+                                <Entry Text = "2" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="End">
+                                    <Entry.Behaviors>
+                                        <local:NumericEntryBehavior />
+                                    </Entry.Behaviors> 
+                                </Entry> 
+                            </StackLayout>
+                        </ContentView>
+
+                    </ViewCell>                    
+                </TableSection> 
+            </TableView.Root>
+        </TableView>  
+    </ContentPage.Content>
+</ContentPage>

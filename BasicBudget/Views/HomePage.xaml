@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TabbedPage 
+    xmlns="http://xamarin.com/schemas/2014/forms" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+    xmlns:local="clr-namespace:BasicBudget.Views;assembly=BasicBudget"
+    x:Class="BasicBudget.Views.HomePage">
+
+    <ContentPage Title="Tab 1" ></ContentPage>
+    
+    <local:Views.CamerPage Title="Tab 1" Icon="nowplaying_movies.png"></local:Views.CamerPage>
+    <local:Views.EntryPage Title="Tab 2" Icon="nowplaying_movies.png"></local:Views.EntryPage>
+    <local:Views.CategoriesPage Title="Tab 3" Icon="nowplaying_movies.png"></local:Views.CategoriesPage>
+    
+</TabbedPage>
