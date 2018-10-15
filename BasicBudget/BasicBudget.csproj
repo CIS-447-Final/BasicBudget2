@@ -15,7 +15,6 @@
   <ItemGroup>
     <Folder Include="Views\" />
     <Folder Include="Behaviors\" />
-    <Folder Include="Models\" />
     <Folder Include="TestData\" />
   </ItemGroup>
   <ItemGroup>
