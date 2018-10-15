@@ -2,6 +2,9 @@
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
+
+
+
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace BasicBudget
 {
@@ -12,7 +15,15 @@ namespace BasicBudget
         {
             InitializeComponent();
 
-            MainPage = new NavigationPage(new HomePageOne());
+            var navPage = new NavigationPage(new CategoryPage());
+            Xamarin.Forms.PlatformConfiguration.iOSSpecific.NavigationPage.
+                    SetPrefersLargeTitles(navPage, true);
+            MainPage = navPage;
+            //MainPage = new HomePageOne();
+            //MainPage = new NavigationPage(new LargeTitleSample());
+            //MainPage = new CategoryPage();
+
+
         }
 
         protected override void OnStart()

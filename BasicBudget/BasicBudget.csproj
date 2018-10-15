@@ -11,6 +11,7 @@
 
   <ItemGroup>
     <PackageReference Include="Xamarin.Forms" Version="3.1.0.697729" />
+    <PackageReference Include="Syncfusion.Xamarin.SfListView" Version="16.3.0.21" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\" />
@@ -36,11 +37,16 @@
     <Compile Remove="Views\EntriesPage.xaml.cs" />
     <Compile Remove="ViewModels\CategoryViewModel.cs" />
     <Compile Remove="TestData\ExpenseData.cs" />
+    <Compile Remove="EnterCategoryPage.xaml.cs" />
+    <Compile Remove="LargeTits.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="NewCategoryPage.xaml.cs">
+      <DependentUpon>NewCategoryPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

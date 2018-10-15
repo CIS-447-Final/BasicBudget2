@@ -4,9 +4,9 @@ using BasicBudget.Models;
 
 namespace BasicBudget.TestData
 {
-    public class CategoryData
+    public static class CategoryData
     {
-        public List<Category> Categories = new List<Category>()
+        public static List<Category> Categories = new List<Category>()
         {
             new Category()
             {

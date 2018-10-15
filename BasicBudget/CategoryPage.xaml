@@ -1,12 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="BasicBudget.CategoryPage">
+<ContentPage 
+             Title="Categories"
+             xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:xForms="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
+             x:Class="BasicBudget.CategoryPage"
+             >
     <ContentPage.Content>
         
         
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="0.1*"/>
-                <RowDefinition Height="0.1*"/>
+                <RowDefinition Height="0.2*"/>
                 <RowDefinition Height="0.1*"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
@@ -17,18 +23,18 @@
                 <ColumnDefinition Width="0.2*"/>
             </Grid.ColumnDefinitions>
                 <Button Text= "&lt;" Grid.Column="0"></Button>
-                <Label Grid.Column = "1" Text="Month" Margin="0,0, 0, 0" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"></Label>
+                <Label Grid.Column = "1" Text="October" Margin="0,0, 0, 0" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="Large" ></Label>
                 <Button Grid.Column = "2" Text=">"></Button>
            
             </Grid>
-            <Grid Grid.Row="1">
+            <Grid Grid.Row="1" BackgroundColor="White">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="0.2*"/>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="0.2*"/>
                 </Grid.ColumnDefinitions>
                     <Label Grid.Column="0"></Label>
-                    <Label Grid.Column="1" Text="$1000" Margin="0,0, 0, 0" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"></Label>
+                    <Label x:Name = "Test" Grid.Column="1" Text="$1000" Margin="0,0, 0, 0" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"></Label>
                     <Button Grid.Column="2" Text=">"></Button>
             </Grid>
             <Grid Grid.Row="2">
@@ -43,6 +49,7 @@
             </Grid>
             
            <StackLayout Grid.Row="3">
+            
             <ListView x:Name="categoryListView" HasUnevenRows="true" SeparatorVisibility="Default" ItemSelected="Handle_ItemSelected" >
             <ListView.ItemTemplate>
                 <DataTemplate>
@@ -53,7 +60,7 @@
                                     <ColumnDefinition Width="*"/>
                                     <ColumnDefinition Width="100"/>
                                 </Grid.ColumnDefinitions>
-                                <Image Source="latest_movies.png" HorizontalOptions="Center" VerticalOptions="Center"></Image>
+                               
                                 
                                 <StackLayout Margin="6,4,6,4" Grid.Column="1">
                                     <Label Text="{Binding Name}" FontSize="20" TextColor="Black"></Label>
@@ -71,11 +78,16 @@
                 </DataTemplate> 
             </ListView.ItemTemplate>
         </ListView>
-        <Button BackgroundColor="Lime" Text="New Category" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand" FontSize="24"></Button>
+        <!--<Button BackgroundColor="Lime" Text="New Category" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand" FontSize="24" Clicked="Handle_Clicked"></Button>
+                -->
         </StackLayout>
             
             
             
         </Grid>
     </ContentPage.Content>
+    <ContentPage.ToolbarItems> 
+        <ToolbarItem Text="New" Clicked="Handle_Clicked" />
+       
+    </ContentPage.ToolbarItems>
 </ContentPage>

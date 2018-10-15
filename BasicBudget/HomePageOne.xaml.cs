@@ -10,6 +10,14 @@ namespace BasicBudget
         public HomePageOne()
         {
             InitializeComponent();
+
+        }
+
+      
+        public static void ChangeTitle()
+        {
+            HomePageOne test = new HomePageOne();
+            test.Title = "Hello";
         }
     }
 }

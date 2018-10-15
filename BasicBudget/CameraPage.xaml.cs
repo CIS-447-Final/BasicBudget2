@@ -10,6 +10,15 @@ namespace BasicBudget
         public CameraPage()
         {
             InitializeComponent();
+
         }
+
+        protected override void OnAppearing()
+        {
+            HomePageOne.
+                       ChangeTitle();
+        }
+
+
     }
 }

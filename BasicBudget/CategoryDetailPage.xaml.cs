@@ -9,7 +9,7 @@ namespace BasicBudget
 {
     public partial class CategoryDetailPage : ContentPage
     {
-        private ObservableCollection<Expense> categoriesEntries { get; set; }
+        public ObservableCollection<Expense> categoriesEntries { get; set; }
 
         public CategoryDetailPage(Category category)
         {
@@ -20,13 +20,13 @@ namespace BasicBudget
             CategoryName.Text = category.Name;
             AddData(category);
         }
-
+ 
 
         void AddData(Category category)
         {
-            CategoryData _context = new CategoryData();
+            //CategoryData _context = new CategoryData();
             
-            foreach (var expense in _context.Categories)
+            foreach (var expense in CategoryData.Categories)
             {
                 //expense.CategoryExpenses
                 if(category.Name == expense.Name){
