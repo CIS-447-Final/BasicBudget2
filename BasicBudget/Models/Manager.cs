@@ -22,6 +22,7 @@ namespace BasicBudget.Models
             else
             {
                 // If there is no data in local storage, add a new MonthBudget to the current month and set SelectedMonth to it.
+                MonthBudgets = new Dictionary<DateTime, MonthBudget>();
                 var currentMonth = GetCurrentMonthAsDateTime();
 
                 MonthBudgets.Add(currentMonth, new MonthBudget());
@@ -61,7 +62,7 @@ namespace BasicBudget.Models
             return MonthBudgets[SelectedMonth];
         }
 
-        public static Dictionary<string, Category> GetSelectedMonthBudgetCategories()
+        public static List<Category> GetSelectedMonthBudgetCategories()
         {
             return MonthBudgets[SelectedMonth].Categories;
         }
@@ -80,14 +81,24 @@ namespace BasicBudget.Models
             MonthBudgets[nextMonth].Income = MonthBudgets[SelectedMonth].Income;
         }
 
-        public static void TransferForwardCategory(string categoryName)
+        public static void TransferForwardCategory(Category categoryToTransfer)
         {
-            var categoryCopy = MonthBudgets[SelectedMonth].Categories[categoryName];
             var nextMonth = SelectedMonth.AddMonths(1);
 
             VerifyAdjacentMonthExists();
 
-            MonthBudgets[nextMonth].AddCategories(new Dictionary<string, Category> { { categoryName, categoryCopy } });
+            MonthBudgets[nextMonth].AddCategories(CreateCategory(categoryToTransfer.Name, categoryToTransfer.Budget));
+        }
+
+        /// <summary>
+        /// Use this to create a new list of a single category. To be used in conjuction with AddCategories.
+        /// </summary>
+        /// <param name="categoryName">The category name.</param>
+        /// <param name="budget">The budget amount.</param>
+        /// <returns>A new list of a single category.</returns>
+        public static List<Category> CreateCategory(string categoryName, decimal budget)
+        {
+            return new List<Category> { new Category(categoryName, budget) };
         }
     }
 }
