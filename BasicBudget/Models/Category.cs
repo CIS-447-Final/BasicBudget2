@@ -6,11 +6,13 @@ namespace BasicBudget.Models
 {
     public class Category
     {
+        public string Name { get; set; }
         public decimal Budget { get; set; }
         private List<Expense> CategoryExpenses = new List<Expense>();
 
-        public Category(decimal budget)
+        public Category(string name, decimal budget)
         {
+            Name = name;
             Budget = budget;
         }
 
@@ -47,6 +49,22 @@ namespace BasicBudget.Models
             }
 
             return result;
+        }
+
+        /// <summary>
+        /// Gets the sum of all the expenses in this category.
+        /// </summary>
+        /// <returns>The sum of all the expenses in this category.</returns>
+        public decimal GetSpentAmount()
+        {
+            decimal spentAmount = 0;
+
+            foreach(var expense in CategoryExpenses)
+            {
+                spentAmount += expense.Amount;
+            }
+
+            return spentAmount;
         }
 
         /// <summary>
