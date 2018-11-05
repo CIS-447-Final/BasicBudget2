@@ -1,7 +1,9 @@
 ﻿using BasicBudget.Models;
-using BasicBudget.TestData;
+//using BasicBudget.TestData;
 using System.Collections.ObjectModel;
 using Xamarin.Forms;
+using System.Collections.Generic;
+using System.Linq;
 
 
 
@@ -16,8 +18,8 @@ namespace BasicBudget
 
             categoriesEntries = new ObservableCollection<Expense>();
             InitializeComponent();
-            expenseListView.ItemsSource = categoriesEntries;
-            CategoryName.Text = category.Name;
+
+            //CategoryName.Text = category.Name;
             AddData(category);
         }
  
@@ -26,17 +28,20 @@ namespace BasicBudget
         {
             //CategoryData _context = new CategoryData();
             
-            foreach (var expense in CategoryData.Categories)
+            foreach (var expense in category.CategoryExpenses)
             {
+                categoriesEntries.Add(expense);
                 //expense.CategoryExpenses
-                if(category.Name == expense.Name){
-                    for (int i = 0; i < category.CategoryExpenses.Count; i++)
-                    {
-                        categoriesEntries.Add(expense.CategoryExpenses[i]);
-                    }
-                }
+                //if(category.Name == expense.Name){
+                //    for (int i = 0; i < category.CategoryExpenses.Count; i++)
+                //    {
+                //        categoriesEntries.Add(expense.CategoryExpenses[i]);
+                //    }
+                //}
 
             }
+
+            expenseListView.ItemsSource = categoriesEntries;
         }
 
     }

@@ -22,7 +22,7 @@
                                 </Grid.ColumnDefinitions>
                                 
                                 <Label Text="{Binding Name}" FontSize="20" TextColor="Black" Grid.Column="0"></Label>
-                                <Label Text="{Binding Price}" FontSize="20" TextColor="Black" Grid.Column="1"></Label>
+                                <Label Text="{Binding Amount}" FontSize="20" TextColor="Black" Grid.Column="1"></Label>
         
                             </Grid>
                                 

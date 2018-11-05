@@ -8,7 +8,7 @@ namespace BasicBudget.Models
     {
         public string Name { get; set; }
         public decimal Budget { get; set; }
-        private List<Expense> CategoryExpenses = new List<Expense>();
+        public List<Expense> CategoryExpenses = new List<Expense>();
 
         public Category(string name, decimal budget)
         {
@@ -59,7 +59,7 @@ namespace BasicBudget.Models
         {
             decimal spentAmount = 0;
 
-            foreach(var expense in CategoryExpenses)
+            foreach (var expense in CategoryExpenses)
             {
                 spentAmount += expense.Amount;
             }

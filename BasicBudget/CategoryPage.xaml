@@ -88,6 +88,8 @@
     </ContentPage.Content>
     <ContentPage.ToolbarItems> 
         <ToolbarItem Text="New" Clicked="Handle_Clicked" />
+        <ToolbarItem Text="Upload" Clicked="Upload_Clicked" />
+        <ToolbarItem Text="Download" Clicked="Download_Clicked"/>
        
     </ContentPage.ToolbarItems>
 </ContentPage>

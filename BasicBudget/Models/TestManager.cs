@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using System.Text;
 using System.Linq;
 
+
 namespace BasicBudget.Models
 {
-    public static class Manager
+    public class TestManager
     {
-        public static Dictionary<DateTime, MonthBudget> MonthBudgets { get; set; }
-        public static DateTime SelectedMonth { get; set; }
+        public Dictionary<DateTime, MonthBudget> MonthBudgets = new Dictionary<DateTime, MonthBudget>();
+        public DateTime SelectedMonth;
 
-        static Manager()
+        public TestManager()
         {
             // Check if local storage is empty or not.
             bool DataExistsInLocalStorage = false;
@@ -22,21 +23,21 @@ namespace BasicBudget.Models
             else
             {
                 // If there is no data in local storage, add a new MonthBudget to the current month and set SelectedMonth to it.
-                MonthBudgets = new Dictionary<DateTime, MonthBudget>();
                 var currentMonth = GetCurrentMonthAsDateTime();
-
-                MonthBudgets.Add(currentMonth, new MonthBudget());
+                var testBudget = new MonthBudget();
+                
+                MonthBudgets.Add(currentMonth, testBudget);
                 SelectedMonth = currentMonth;
 
             }
         }
 
-        private static DateTime GetCurrentMonthAsDateTime()
+        private DateTime GetCurrentMonthAsDateTime()
         {
             return new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
         }
 
-        private static DateTime VerifyAdjacentMonthExists(bool next = true)
+        private DateTime VerifyAdjacentMonthExists(bool next = true)
         {
             var adjacentMonth = SelectedMonth.AddMonths(next ? 1 : -1);
 
@@ -48,12 +49,12 @@ namespace BasicBudget.Models
             return adjacentMonth;
         }
 
-        public static MonthBudget GetSelectedMonthBudget()
+        public MonthBudget GetSelectedMonthBudget()
         {
             return MonthBudgets[SelectedMonth];
         }
 
-        public static MonthBudget GetAdjacentMonthBudget(bool next)
+        public MonthBudget GetAdjacentMonthBudget(bool next)
         {
             VerifyAdjacentMonthExists(next);
 
@@ -62,17 +63,17 @@ namespace BasicBudget.Models
             return MonthBudgets[SelectedMonth];
         }
 
-        public static List<Category> GetSelectedMonthBudgetCategories()
+        public Dictionary<string, Category> GetSelectedMonthBudgetCategories()
         {
             return MonthBudgets[SelectedMonth].Categories;
         }
 
-        public static void ChangeSelectedMonthIncome(decimal newIncome)
+        public void ChangeSelectedMonthIncome(decimal newIncome)
         {
             MonthBudgets[SelectedMonth].Income = newIncome;
         }
 
-        public static void TransferForwardIncome()
+        public void TransferForwardIncome()
         {
             var nextMonth = SelectedMonth.AddMonths(1);
 
@@ -81,24 +82,14 @@ namespace BasicBudget.Models
             MonthBudgets[nextMonth].Income = MonthBudgets[SelectedMonth].Income;
         }
 
-        public static void TransferForwardCategory(Category categoryToTransfer)
+        public void TransferForwardCategory(string categoryName)
         {
+            var categoryCopy = MonthBudgets[SelectedMonth].Categories[categoryName];
             var nextMonth = SelectedMonth.AddMonths(1);
 
             VerifyAdjacentMonthExists();
 
-            MonthBudgets[nextMonth].AddCategories(CreateCategory(categoryToTransfer.Name, categoryToTransfer.Budget));
-        }
-
-        /// <summary>
-        /// Use this to create a new list of a single category. To be used in conjuction with AddCategories.
-        /// </summary>
-        /// <param name="categoryName">The category name.</param>
-        /// <param name="budget">The budget amount.</param>
-        /// <returns>A new list of a single category.</returns>
-        public static List<Category> CreateCategory(string categoryName, decimal budget)
-        {
-            return new List<Category> { new Category(categoryName, budget) };
+            MonthBudgets[nextMonth].AddCategories(new Dictionary<string, Category> { { categoryName, categoryCopy } });
         }
     }
 }

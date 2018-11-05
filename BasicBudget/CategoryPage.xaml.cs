@@ -1,8 +1,10 @@
-﻿using BasicBudget.Models;
-using BasicBudget.TestData;
+﻿//using BasicBudget.Models;using BasicBudget.TestData;
 using System.Collections.ObjectModel;
 using Xamarin.Forms;
-
+using BasicBudget.Models;
+using System.Linq;
+using System.Collections.Generic;
+using System;
 
 
 namespace BasicBudget
@@ -14,33 +16,82 @@ namespace BasicBudget
         public CategoryPage()
         {
 
-            categories = new ObservableCollection<Category>();
+            //categories = new List<Category>();
             InitializeComponent();
-            categoryListView.ItemsSource = categories;
+            //categoryListView.ItemsSource = categories;
 
-            AddData();
-            Test.Text = categories.Count.ToString();
+            //AddData();
+            //
         }
 
-       
+        //private static CategoryPage _cat;
 
-        void AddData()
+        //public static CategoryPage getSharedCategory()
+        //{
+        //    if (_cat == null)
+        //        _cat = new CategoryPage();
+        //    return _cat;
+        //}
+
+
+
+        public void AddData(MonthBudget monthBudget)
         {
-            //CategoryData _context = new CategoryData();
 
-            foreach(var category in CategoryData.Categories)
+            foreach(var category in monthBudget.Categories)
             {
                 categories.Add(category);
             }
+
+            //Test.Text = categories.Count.ToString();
+            //_cat.categoryListView.ItemsSource = categories;
+
+
         }
 
-        public static void UpdateCategoryList()
+        protected override void OnAppearing()
         {
-            int lengthOfList = CategoryData.Categories.Count;
+            base.OnAppearing();
 
-            categories.Add(CategoryData.Categories[lengthOfList - 1]);
+            ObservableCollection<Category> categoriesTest = new ObservableCollection<Category>();
+            //Dictionary<string, Category> catTest = new Dictionary<string, Category>();
+
+            MonthBudget monthBudget = Manager.GetSelectedMonthBudget();
+
+            foreach (var category in monthBudget.Categories)
+            {
+             
+                categoriesTest.Add(category);
+            
+                
+            }
+
+            categoryListView.ItemsSource = categoriesTest;
+            //Test.Text = categoriesTest.Count.ToString();
+
+            
+            //your code here;
 
         }
+
+        //protected override async void OnAppearing()
+        //{
+        //    base.OnAppearing();
+
+        //    // Reset the 'resume' id, since we just want to re-start here
+        //    //((App)App.Current).ResumeAtTodoId = -1;
+        //    categoryListView.ItemsSource = categories;
+        //}
+
+        //void AddDA
+        //public static void UpdateCategoryList()
+        //{
+        //    int lengthOfList = Manager.GetSelectedMonthBudget().Categories.Count;
+
+
+        //    categories.Add(CategoryData.Categories[lengthOfList - 1]);
+
+        //}
 
         // Category clicked.
         void Handle_ItemSelected(object sender, Xamarin.Forms.SelectedItemChangedEventArgs e)
@@ -56,5 +107,17 @@ namespace BasicBudget
         {
             Navigation.PushAsync(new NewCategoryPage());
         }
+
+
+        void Upload_Clicked(object sender, System.EventArgs e)
+        {
+            Navigation.PushAsync(new NewCategoryPage());
+        }
+
+        void Download_Clicked(object sender, System.EventArgs e)
+        {
+            Navigation.PushAsync(new NewCategoryPage());
+        }
+
     }
 }
