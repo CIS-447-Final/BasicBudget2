@@ -13,11 +13,15 @@ namespace BasicBudget
     {
         private static ObservableCollection<Category> categories { get; set; }
 
+        
+
         public CategoryPage()
         {
-
             //categories = new List<Category>();
             InitializeComponent();
+
+            
+             
             //categoryListView.ItemsSource = categories;
 
             //AddData();
@@ -111,7 +115,8 @@ namespace BasicBudget
 
         void Upload_Clicked(object sender, System.EventArgs e)
         {
-            Navigation.PushAsync(new NewCategoryPage());
+            DisplayAlert("Notif", Application.Current.Properties.ContainsKey("LocalData").ToString(), "OK");
+            //Navigation.PushAsync(new NewCategoryPage());
         }
 
         void Download_Clicked(object sender, System.EventArgs e)
