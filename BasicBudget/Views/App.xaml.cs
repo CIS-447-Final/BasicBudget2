@@ -1,7 +1,7 @@
 ﻿using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-
+using BasicBudget.Models;
 
 
 
@@ -29,11 +29,14 @@ namespace BasicBudget
         protected override void OnStart()
         {
             // Handle when your app starts
+            LocalStorage.SaveData();
         }
 
         protected override void OnSleep()
         {
             // Handle when your app sleeps
+            
+            
         }
 
         protected override void OnResume()
