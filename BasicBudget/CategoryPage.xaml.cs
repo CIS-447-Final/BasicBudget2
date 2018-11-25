@@ -18,6 +18,12 @@ namespace BasicBudget
 
             //categories = new List<Category>();
             InitializeComponent();
+
+
+            if(Application.Current.Properties.ContainsKey("Money"))
+            {
+                Test.Text = Application.Current.Properties["Money"].ToString();
+            }
             //categoryListView.ItemsSource = categories;
 
             //AddData();
@@ -111,12 +117,12 @@ namespace BasicBudget
 
         void Upload_Clicked(object sender, System.EventArgs e)
         {
-            Navigation.PushAsync(new NewCategoryPage());
+            Application.Current.Properties["Money"] = Test.Text + "1";
         }
 
         void Download_Clicked(object sender, System.EventArgs e)
         {
-            Navigation.PushAsync(new NewCategoryPage());
+            Test.Text = Application.Current.Properties["Money"].ToString();
         }
 
     }

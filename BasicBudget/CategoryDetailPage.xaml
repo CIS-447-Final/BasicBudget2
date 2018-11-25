@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="BasicBudget.CategoryDetailPage">
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="BasicBudget.CategoryDetailPage" x:Title="Expenses" BackgroundColor="#F9F9F9"> 
     <ContentPage.Content>
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="0.1*" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-            <Label x:Name = "CategoryName" Grid.Row="0"></Label>
             
-            <ListView x:Name="expenseListView" HasUnevenRows="true" SeparatorVisibility="Default" Grid.Row="1">
+            <ListView x:Name="expenseListView" HasUnevenRows="true" SeparatorVisibility="Default" Grid.Row="1" BackgroundColor="#F9F9F9">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
@@ -17,12 +16,18 @@
                             
                             <Grid Margin="15,5,10,5">
                                 <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width=".25*"/>
                                     <ColumnDefinition Width=".50*"/>
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
+                                <StackLayout Grid.Column="0">
+                                    <Label Text="{Binding Time.Month}" FontSize="15" TextColor="Black" Grid.Column="0" HorizontalTextAlignment="Center"></Label>
+                                    <Label Text="{Binding Time.Day}" FontSize="25" FontAttributes="Bold" TextColor="Black" Grid.Column="0" HorizontalTextAlignment="Center"></Label>
+                                    
+                                </StackLayout>
                                 
-                                <Label Text="{Binding Name}" FontSize="20" TextColor="Black" Grid.Column="0"></Label>
-                                <Label Text="{Binding Amount}" FontSize="20" TextColor="Black" Grid.Column="1"></Label>
+                                <Label Text="{Binding Name}" FontSize="20" TextColor="Black" Grid.Column="1" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"></Label>
+                                <Label Text="{Binding Amount}" FontSize="20" TextColor="Red" Grid.Column="2" HorizontalTextAlignment="End" VerticalTextAlignment="Center"></Label>
         
                             </Grid>
                                 
@@ -34,6 +39,10 @@
         
          
     </ContentPage.Content>
+    <ContentPage.ToolbarItems> 
+        <ToolbarItem Text="New" Clicked="Handle_Clicked"/>
+       
+    </ContentPage.ToolbarItems>
     
    
 </ContentPage>

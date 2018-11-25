@@ -19,7 +19,7 @@ namespace BasicBudget
             categoriesEntries = new ObservableCollection<Expense>();
             InitializeComponent();
 
-            //CategoryName.Text = category.Name;
+            Title = category.Name;
             AddData(category);
         }
  
@@ -42,6 +42,12 @@ namespace BasicBudget
             }
 
             expenseListView.ItemsSource = categoriesEntries;
+        }
+
+        // New Category button cliked
+        void Handle_Clicked(object sender, System.EventArgs e)
+        {
+            Navigation.PushAsync(new AddExpensePage());
         }
 
     }

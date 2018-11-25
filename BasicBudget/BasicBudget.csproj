@@ -40,6 +40,7 @@
     <Compile Remove="LargeTits.cs" />
     <Compile Remove="TestData\CategoryData.cs" />
     <Compile Remove="Models\TestManager.cs" />
+    <Compile Remove="LargeTitleSample.xaml.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\App.xaml.cs">
@@ -59,5 +60,6 @@
     <EmbeddedResource Remove="CameraPg.xaml" />
     <EmbeddedResource Remove="TabbedViewController.xaml" />
     <EmbeddedResource Remove="Views\EntriesPage.xaml" />
+    <EmbeddedResource Remove="EnterCategoryPage.xaml" />
   </ItemGroup>
 </Project>

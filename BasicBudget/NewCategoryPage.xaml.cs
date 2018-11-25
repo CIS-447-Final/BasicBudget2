@@ -16,49 +16,25 @@ namespace BasicBudget
 
         }
 
-        // Done Button.
-        void Handle_Clicked(object sender, System.EventArgs e)
+ 
+
+        void Handle_Clicked_1(object sender, System.EventArgs e)
         {
             AddNewCategory();
-
             Navigation.PopAsync();
         }
 
 
-
         void AddNewCategory()
         {
-            // Static Code
-            //foreach(var key in Manager.MonthBudgets.Keys)
-            //{
-            //    Console.WriteLine("Current Month DateTime = " + key);
-            //}
+
 
             var test = Manager.CreateCategory(CategoryName.Text, decimal.Parse(CategoryExpense.Text));
-
-            //var test = Manager.MonthBudgets[Manager.SelectedMonth].CreateCategory(CategoryName.Text, decimal.Parse(CategoryExpense.Text));
-            //test["Hello"].AddExpense("Cereal", DateTime.Now, 30);
-            //test.A
             test[0].AddExpense("Cereal", DateTime.Now, 30);
+            test[0].AddExpense("Cereal2", DateTime.Now, 40);
             Manager.MonthBudgets[Manager.SelectedMonth].AddCategories(test);
-
-            Console.WriteLine("*** CAT CHECK **** " + Manager.GetSelectedMonthBudget().Categories.Count);
-            //CategoryPage tc = CategoryPage.getSharedCategory();
-            //tc.AddData(monthBudget);
-
-            //CategoryPage.AddData(monthBudget);
 
         }
 
-        //void AddNewCategory()
-        //{
-        //    Models.Category testCategory = new Models.Category();
-        //    testCategory.Budget = float.Parse(CategoryExpense.Text);
-        //    testCategory.Name = CategoryName.Text;
-        //    CategoryData.Categories.Add(testCategory);
-
-        //    CategoryPage.UpdateCategoryList();
-        //    page.UpdateCategoryList(_context);
-        //}
     }
 }

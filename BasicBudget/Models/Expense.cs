@@ -12,6 +12,8 @@ namespace BasicBudget.Models
             Name = name;
             Time = time;
             Amount = amount;
+
+          
         }
     }
 }
