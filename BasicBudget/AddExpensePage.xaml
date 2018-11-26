@@ -25,7 +25,7 @@
                     <Entry x:Name = "ExpenseTotal" Placeholder="Enter Amount..." Margin="10,0,10,0" HeightRequest="35"/>
             </StackLayout>
             
-            <Button Grid.Row = "2" BackgroundColor="#31E7CA" Text="Done" FontAttributes="Bold" Margin="25,50,25,50" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand" FontSize="24" TextColor="White" ></Button>
+            <Button Grid.Row = "2" BackgroundColor="#31E7CA" Text="Done" FontAttributes="Bold" Margin="25,50,25,50" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand" FontSize="24" TextColor="White" Clicked="Handle_Clicked" ></Button>
         </Grid>
     </ContentPage.Content>
 </ContentPage>

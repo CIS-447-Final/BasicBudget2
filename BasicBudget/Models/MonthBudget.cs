@@ -40,5 +40,21 @@ namespace BasicBudget.Models
         {
             return Categories.Remove(categoryToDelete);
         }
+
+        public void AddExpenseToCategory(string categoryName, string expenseName, DateTime time, decimal amount)
+        {
+            var category = Categories.Where(cat => cat.Name == categoryName).FirstOrDefault();
+
+            Categories.Remove(category);
+            category.AddExpense(expenseName, time, amount);
+            Categories.Insert(0, category);
+        }
+
+        public void DeleteExpenseToCategory(string categoryName)
+        {
+            var category = Categories.Where(cat => cat.Name == categoryName).FirstOrDefault();
+
+            Categories.Remove(category);
+        }
     }
 }

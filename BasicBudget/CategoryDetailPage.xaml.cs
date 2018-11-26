@@ -13,16 +13,37 @@ namespace BasicBudget
     {
         public ObservableCollection<Expense> categoriesEntries { get; set; }
 
+        Category Category;
+
         public CategoryDetailPage(Category category)
         {
 
             categoriesEntries = new ObservableCollection<Expense>();
             InitializeComponent();
 
+            Category = category;
+
             Title = category.Name;
-            AddData(category);
+            //AddData(category);
         }
- 
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+
+            ObservableCollection<Expense> categoriesEntries = new ObservableCollection<Expense>();
+            //Dictionary<string, Category> catTest = new Dictionary<string, Category>();
+
+            //MonthBudget monthBudget = Manager.GetSelectedMonthBudget();
+
+            foreach (var expense in Category.CategoryExpenses)
+            {
+                categoriesEntries.Add(expense);
+            }
+
+            expenseListView.ItemsSource = categoriesEntries;
+        }
+
 
         void AddData(Category category)
         {
@@ -47,7 +68,7 @@ namespace BasicBudget
         // New Category button cliked
         void Handle_Clicked(object sender, System.EventArgs e)
         {
-            Navigation.PushAsync(new AddExpensePage());
+            Navigation.PushAsync(new AddExpensePage(Category));
         }
 
     }

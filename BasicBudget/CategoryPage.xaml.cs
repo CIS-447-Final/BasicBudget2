@@ -60,7 +60,6 @@ namespace BasicBudget
             base.OnAppearing();
 
             ObservableCollection<Category> categoriesTest = new ObservableCollection<Category>();
-            //Dictionary<string, Category> catTest = new Dictionary<string, Category>();
 
             MonthBudget monthBudget = Manager.GetSelectedMonthBudget();
 
@@ -73,31 +72,26 @@ namespace BasicBudget
             }
 
             categoryListView.ItemsSource = categoriesTest;
-            //Test.Text = categoriesTest.Count.ToString();
-
-            
-            //your code here;
 
         }
 
-        //protected override async void OnAppearing()
-        //{
-        //    base.OnAppearing();
+        void ShowDownloadData()
+        {
+            ObservableCollection<Category> categoriesTest = new ObservableCollection<Category>();
 
-        //    // Reset the 'resume' id, since we just want to re-start here
-        //    //((App)App.Current).ResumeAtTodoId = -1;
-        //    categoryListView.ItemsSource = categories;
-        //}
+            MonthBudget monthBudget = Manager.GetSelectedMonthBudget();
 
-        //void AddDA
-        //public static void UpdateCategoryList()
-        //{
-        //    int lengthOfList = Manager.GetSelectedMonthBudget().Categories.Count;
+            foreach (var category in monthBudget.Categories)
+            {
+
+                categoriesTest.Add(category);
 
 
-        //    categories.Add(CategoryData.Categories[lengthOfList - 1]);
+            }
 
-        //}
+            categoryListView.ItemsSource = categoriesTest;
+        }
+
 
         // Category clicked.
         void Handle_ItemSelected(object sender, Xamarin.Forms.SelectedItemChangedEventArgs e)
@@ -117,12 +111,15 @@ namespace BasicBudget
 
         void Upload_Clicked(object sender, System.EventArgs e)
         {
-            Application.Current.Properties["Money"] = Test.Text + "1";
+            DatabaseConnection.Upload();
+            //Application.Current.Properties["Money"] = Test.Text + "1";
         }
 
         void Download_Clicked(object sender, System.EventArgs e)
         {
-            Test.Text = Application.Current.Properties["Money"].ToString();
+            DatabaseConnection.Download();
+            ShowDownloadData();
+            //Test.Text = Application.Current.Properties["Money"].ToString();
         }
 
     }
