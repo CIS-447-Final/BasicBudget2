@@ -3,4 +3,19 @@
     <ContentPage.Content>
         <Label Text="Camera Page, coming soon.." HorizontalTextAlignment="Center" VerticalTextAlignment="Center"></Label>
     </ContentPage.Content>
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            
+            
+        </Grid.RowDefinitions>
+        
+        <Image x:Name="PhotoImage" />
+        <Button x:Name="CameraButton" Text="Take Photo" Grid.Row="1"/>
+        
+        
+ 
+    </Grid>
 </ContentPage>

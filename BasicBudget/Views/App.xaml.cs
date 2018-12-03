@@ -15,11 +15,11 @@ namespace BasicBudget
         {
             InitializeComponent();
 
-            var navPage = new NavigationPage(new CategoryPage());
-            Xamarin.Forms.PlatformConfiguration.iOSSpecific.NavigationPage.
-                    SetPrefersLargeTitles(navPage, true);
-            MainPage = navPage;
-            //MainPage = new HomePageOne();
+            //var navPage = new NavigationPage(new CategoryPage());
+            //Xamarin.Forms.PlatformConfiguration.iOSSpecific.NavigationPage.
+            //        SetPrefersLargeTitles(navPage, true);
+            //MainPage = navPage;
+            MainPage = new CameraPage();
             //MainPage = new NavigationPage(new LargeTitleSample());
             //MainPage = new CategoryPage();
 
