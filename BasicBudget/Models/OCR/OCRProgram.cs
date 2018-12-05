@@ -37,6 +37,8 @@ namespace BasicBudget.Models.OCR
             }
             catch
             {
+                stream.Close();
+                stream.Dispose();
                 return totalValue;
             }
 
