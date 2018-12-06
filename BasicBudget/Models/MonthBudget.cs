@@ -32,13 +32,14 @@ namespace BasicBudget.Models
         }
 
         /// <summary>
-        /// Delete a category by object.
+        /// Delete a category by name.
         /// </summary>
-        /// <param name="name">The category object to delete.</param>
-        /// <returns>Whether or not the delete succeeded.</returns>
-        public bool DeleteCategory(Category categoryToDelete)
+        /// <param name="name">The name of the category to delete.</param>
+        public void DeleteCategory(string categoryName)
         {
-            return Categories.Remove(categoryToDelete);
+            var category = Categories.Where(cat => cat.Name == categoryName).FirstOrDefault();
+
+            Categories.Remove(category);
         }
 
         public void AddExpenseToCategory(string categoryName, string expenseName, DateTime time, decimal amount)
@@ -50,11 +51,13 @@ namespace BasicBudget.Models
             Categories.Insert(0, category);
         }
 
-        public void DeleteExpenseToCategory(string categoryName)
+        public void DeleteExpenseFromCategory(string categoryName, string expenseName, DateTime time)
         {
             var category = Categories.Where(cat => cat.Name == categoryName).FirstOrDefault();
 
             Categories.Remove(category);
+            category.DeleteExpense(expenseName, time);
+            Categories.Insert(0, category);
         }
     }
 }

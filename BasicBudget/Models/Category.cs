@@ -8,6 +8,21 @@ namespace BasicBudget.Models
     {
         public string Name { get; set; }
         public decimal Budget { get; set; }
+        public decimal AmountSpent
+        {
+            get
+            {
+                return CategoryExpenses.Sum((expense) => expense.Amount);
+            }
+        }
+        public decimal PercentRemaining
+        {
+            get
+            {
+                return 1m - (AmountSpent / Budget);
+            }
+        }
+
         public List<Expense> CategoryExpenses = new List<Expense>();
 
         public Category(string name, decimal budget)
