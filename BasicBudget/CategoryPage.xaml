@@ -21,20 +21,18 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="0.2*"/>
             </Grid.ColumnDefinitions>
-                <Button Text= "&lt;" Grid.Column="0" TextColor="#31E7CA" FontSize="Medium"></Button>
-                <Label Grid.Column = "1" Text="October" Margin="0,0, 0, 0" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="35" ></Label>
-                <Button Grid.Column = "2" Text=">" TextColor="#31E7CA" FontSize="Medium" ></Button>
+                <Button Text= "&lt;" Grid.Column="0" TextColor="#31E7CA" FontSize="Medium" Clicked="Prev_Month_ButtonClicker"></Button>
+                <Label x:Name = "MonthName" Grid.Column = "1" Text="October" Margin="0,0, 0, 0" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="35" ></Label>
+                <Button Grid.Column = "2" Text=">" TextColor="#31E7CA" FontSize="Medium" Clicked="Next_Month_ButtonClicker"></Button>
            
             </Grid>
             <Grid Grid.Row="1">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="0.2*"/>
                     <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="0.2*"/>
                 </Grid.ColumnDefinitions>
                     <Label Grid.Column="0"></Label>
-                    <Label x:Name = "Test" Grid.Column="1" Text="$1000" Margin="0,0, 0, 0" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="Large" FontAttributes="Bold"></Label>
-                    <Button Grid.Column="2" Text=">" TextColor="#31E7CA" FontSize="Large"></Button>
+                    <Entry x:Name = "MonthlyIncome" BackgroundColor="#F9F9F9" TextChanged="Handle_TextChanged" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Grid.Column="0" HorizontalTextAlignment="Center" Keyboard="Numeric" FontSize="35" FontAttributes="Bold"></Entry>
+                    
             </Grid>
             <Grid Grid.Row="2">
                 <Grid.ColumnDefinitions>
@@ -49,7 +47,7 @@
             
            <StackLayout Grid.Row="3">
             
-            <ListView x:Name="categoryListView" HasUnevenRows="true" SeparatorVisibility="Default" ItemSelected="Handle_ItemSelected" BackgroundColor="#F9F9F9">
+            <ListView x:Name="categoryListView" HasUnevenRows="true" SeparatorVisibility="Default" ItemTapped="Handle_ItemSelected" BackgroundColor="#F9F9F9" SelectionMode = "Single">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>

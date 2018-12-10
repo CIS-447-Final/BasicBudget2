@@ -3,17 +3,14 @@
     <ContentPage.Content>
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="0.1*" />
                 <RowDefinition Height="*" />
+               
             </Grid.RowDefinitions>
             
-            <ListView x:Name="expenseListView" HasUnevenRows="true" SeparatorVisibility="Default" Grid.Row="1" BackgroundColor="#F9F9F9">
+            <ListView x:Name="expenseListView" HasUnevenRows="true" SeparatorVisibility="Default" Grid.Row="0" BackgroundColor="#F9F9F9" ItemSelected="ExpenseTapped">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
-
-                            
-                            
                             <Grid Margin="15,5,10,5">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width=".25*"/>
@@ -21,14 +18,13 @@
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
                                 <StackLayout Grid.Column="0">
-                                    <Label Text="{Binding Time.Month}" FontSize="15" TextColor="Black" Grid.Column="0" HorizontalTextAlignment="Center"></Label>
-                                    <Label Text="{Binding Time.Day}" FontSize="25" FontAttributes="Bold" TextColor="Black" Grid.Column="0" HorizontalTextAlignment="Center"></Label>
+                                    <Label Text="{Binding MonthName}" FontSize="15" TextColor="Black" Grid.Column="0" HorizontalTextAlignment="Center"></Label>
+                                    <Label x:Name = "TimeDate" Text="{Binding Time.Day}" FontSize="25" FontAttributes="Bold" TextColor="Black" Grid.Column="0" HorizontalTextAlignment="Center"></Label>
                                     
                                 </StackLayout>
-                                
-                                <Label Text="{Binding Name}" FontSize="20" TextColor="Black" Grid.Column="1" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"></Label>
+                                <Label x:Name = "ExpenseName" Text="{Binding Name}" FontSize="20" TextColor="Black" Grid.Column="1" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"></Label>
+                               
                                 <Label Text="{Binding Amount}" FontSize="20" TextColor="Red" Grid.Column="2" HorizontalTextAlignment="End" VerticalTextAlignment="Center"></Label>
-        
                             </Grid>
                                 
                     </ViewCell>
@@ -40,7 +36,8 @@
          
     </ContentPage.Content>
     <ContentPage.ToolbarItems> 
-        <ToolbarItem Text="New" Clicked="Handle_Clicked"/>
+        <ToolbarItem Text="New Expense" Clicked="Handle_Clicked"/>
+        <ToolbarItem Text="Delete Category" Clicked="DeleteCategoryButton_Clicked" />
        
     </ContentPage.ToolbarItems>
     

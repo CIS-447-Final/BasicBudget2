@@ -16,8 +16,6 @@ namespace BasicBudget
 
         }
 
- 
-
         void Handle_Clicked_1(object sender, System.EventArgs e)
         {
             AddNewCategory();
@@ -28,12 +26,11 @@ namespace BasicBudget
         void AddNewCategory()
         {
 
-
-            var test = Manager.CreateCategory(CategoryName.Text, decimal.Parse(CategoryExpense.Text));
-            //test[0].AddExpense("Cereal", DateTime.Now, 30);
-            //test[0].AddExpense("Cereal2", DateTime.Now, 40);
-            Manager.MonthBudgets[Manager.SelectedMonth].AddCategories(test);
-
+            if (!string.IsNullOrEmpty(CategoryName.Text) && !string.IsNullOrEmpty(CategoryExpense.Text))
+            {
+                var cat = Manager.CreateCategory(CategoryName.Text, decimal.Parse(CategoryExpense.Text));
+                Manager.MonthBudgets[Manager.SelectedMonth].AddCategories(cat);
+            }
         }
 
     }

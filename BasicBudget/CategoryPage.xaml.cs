@@ -15,29 +15,14 @@ namespace BasicBudget
 
         public CategoryPage()
         {
-
-            //categories = new List<Category>();
             InitializeComponent();
 
+            //ccategoryListView.Se
 
-            if(Application.Current.Properties.ContainsKey("Money"))
-            {
-                Test.Text = Application.Current.Properties["Money"].ToString();
-            }
-            //categoryListView.ItemsSource = categories;
+            SetMonthIncomeText();
 
-            //AddData();
-            //
+            SetMonthText();
         }
-
-        //private static CategoryPage _cat;
-
-        //public static CategoryPage getSharedCategory()
-        //{
-        //    if (_cat == null)
-        //        _cat = new CategoryPage();
-        //    return _cat;
-        //}
 
 
 
@@ -49,26 +34,30 @@ namespace BasicBudget
                 categories.Add(category);
             }
 
-            //Test.Text = categories.Count.ToString();
-            //_cat.categoryListView.ItemsSource = categories;
-
-
         }
 
         protected override void OnAppearing()
         {
+
+            //cate
             base.OnAppearing();
 
+            DisplayCategoryList();
+
+        }
+
+        void DisplayCategoryList()
+        {
             ObservableCollection<Category> categoriesTest = new ObservableCollection<Category>();
 
             MonthBudget monthBudget = Manager.GetSelectedMonthBudget();
 
             foreach (var category in monthBudget.Categories)
             {
-             
+
                 categoriesTest.Add(category);
-            
-                
+
+
             }
 
             categoryListView.ItemsSource = categoriesTest;
@@ -101,7 +90,6 @@ namespace BasicBudget
         }
 
 
-
         // New Category button cliked
         void Handle_Clicked(object sender, System.EventArgs e)
         {
@@ -112,15 +100,69 @@ namespace BasicBudget
         void Upload_Clicked(object sender, System.EventArgs e)
         {
             DatabaseConnection.Upload();
-            //Application.Current.Properties["Money"] = Test.Text + "1";
+
         }
 
         void Download_Clicked(object sender, System.EventArgs e)
         {
             DatabaseConnection.Download();
             ShowDownloadData();
-            //Test.Text = Application.Current.Properties["Money"].ToString();
+
         }
 
+        void Next_Month_ButtonClicker(object sender, System.EventArgs e)
+        {
+
+            Manager.GetAdjacentMonthBudget(true);
+            SetMonthText();
+            DisplayCategoryList();
+            SetMonthIncomeText();
+            //SetMonthIncomeText();
+        }
+
+        void Prev_Month_ButtonClicker(object sender, System.EventArgs e)
+        {
+
+            Manager.GetAdjacentMonthBudget(false);
+            SetMonthText();
+            DisplayCategoryList();
+            SetMonthIncomeText();
+            //SetMonthIncomeText();
+        }
+
+        void SetMonthText()
+        {
+            MonthName.Text = Manager.getMonthName(Manager.SelectedMonth.Month);
+        }
+
+        void UpdatedMonthBudget()
+        {
+            if(!String.IsNullOrEmpty(MonthlyIncome.Text))
+            {
+                Manager.GetSelectedMonthBudget().Income = decimal.Parse(MonthlyIncome.Text);
+            }
+            //Manager.GetSelectedMonthBudget().Income = 10.0m;
+        }
+
+        void Handle_TextChanged(object sender, Xamarin.Forms.TextChangedEventArgs e)
+        {
+            UpdatedMonthBudget();
+        }
+
+        void SetMonthIncomeText()
+        {
+            var mbi = Manager.GetSelectedMonthBudget().Income;
+
+            if (mbi == 0)
+            {
+                MonthlyIncome.Text = String.Empty;
+                MonthlyIncome.Placeholder = "Enter Monthly Income...";
+            }
+            else
+            {
+                MonthlyIncome.Text = mbi.ToString();
+            }
+
+        }
     }
 }

@@ -64,5 +64,6 @@
     <EmbeddedResource Remove="TabbedViewController.xaml" />
     <EmbeddedResource Remove="Views\EntriesPage.xaml" />
     <EmbeddedResource Remove="EnterCategoryPage.xaml" />
+    <EmbeddedResource Remove="LargeTitleSample.xaml" />
   </ItemGroup>
 </Project>

@@ -37,6 +37,8 @@ namespace BasicBudget.Models.OCR
             }
             catch
             {
+                //var message = ex.Message;
+                //Console.WriteLine("********" + message );
                 stream.Close();
                 stream.Dispose();
                 return totalValue;
@@ -49,19 +51,14 @@ namespace BasicBudget.Models.OCR
             VisionServiceClient client = new VisionServiceClient("60ae256a757e424c8e286609305b9221", "https://westus.api.cognitive.microsoft.com/vision/v1.0");
             string[] textres = null;
 
-            //if (File.Exists(fname))
-            //{
-
-            //using (Stream stream = File.OpenRead(fname))
-            //{
             OcrResults res = await client.RecognizeTextAsync(stream, "unk", false);
             textres = ConvertToWordsAndLines.GetExtracted(res, words, mergeLines);
             stream.Close();
             stream.Dispose();
-            //}
-            //}
-
             return textres;
+
+
+
         }
     }
 }

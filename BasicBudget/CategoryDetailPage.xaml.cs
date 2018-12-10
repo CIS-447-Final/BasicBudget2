@@ -1,4 +1,5 @@
 ﻿using BasicBudget.Models;
+using System;
 //using BasicBudget.TestData;
 using System.Collections.ObjectModel;
 using Xamarin.Forms;
@@ -24,7 +25,7 @@ namespace BasicBudget
             Category = category;
 
             Title = category.Name;
-            //AddData(category);
+      
         }
 
         protected override void OnAppearing()
@@ -32,9 +33,6 @@ namespace BasicBudget
             base.OnAppearing();
 
             ObservableCollection<Expense> categoriesEntries = new ObservableCollection<Expense>();
-            //Dictionary<string, Category> catTest = new Dictionary<string, Category>();
-
-            //MonthBudget monthBudget = Manager.GetSelectedMonthBudget();
 
             foreach (var expense in Category.CategoryExpenses)
             {
@@ -47,18 +45,11 @@ namespace BasicBudget
 
         void AddData(Category category)
         {
-            //CategoryData _context = new CategoryData();
+
             
             foreach (var expense in category.CategoryExpenses)
             {
                 categoriesEntries.Add(expense);
-                //expense.CategoryExpenses
-                //if(category.Name == expense.Name){
-                //    for (int i = 0; i < category.CategoryExpenses.Count; i++)
-                //    {
-                //        categoriesEntries.Add(expense.CategoryExpenses[i]);
-                //    }
-                //}
 
             }
 
@@ -71,5 +62,34 @@ namespace BasicBudget
             Navigation.PushAsync(new AddExpensePage(Category));
         }
 
+        void DeleteCategoryButton_Clicked(object sender, System.EventArgs e)
+        {
+            MonthBudget mb = Manager.GetSelectedMonthBudget();
+            mb.DeleteCategory(Category.Name);
+            Navigation.PopAsync();
+        }
+
+        void DeleteExpenseButton_Clicked(object sender, System.EventArgs e)
+        {
+
+            //MonthBudget mb = Manager.GetSelectedMonthBudget();
+            //string test = ExpenseName.Text;
+            //mb.DeleteExpenseFromCategory(Category.Name, test, DateTime.Parse(TimeDate.Text));
+        }
+
+
+        void ExpenseTapped(object sender, Xamarin.Forms.SelectedItemChangedEventArgs e)
+        {
+
+
+            var selectedExpense = e.SelectedItem as Expense;
+
+
+            MonthBudget mb = Manager.GetSelectedMonthBudget();
+            mb.DeleteExpenseFromCategory(Category.Name, selectedExpense.Name, selectedExpense.Time);
+            Navigation.PopAsync();
+
+
+        }
     }
 }

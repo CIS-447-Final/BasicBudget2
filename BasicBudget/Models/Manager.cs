@@ -50,9 +50,9 @@ namespace BasicBudget.Models
         {
             var adjacentMonth = SelectedMonth.AddMonths(next ? 1 : -1);
 
-            if (MonthBudgets.Keys.Contains(adjacentMonth))
+            if (!MonthBudgets.Keys.Contains(adjacentMonth))
             {
-                MonthBudgets.Add(SelectedMonth, new MonthBudget());
+                MonthBudgets.Add(adjacentMonth, new MonthBudget());
             }
 
             return adjacentMonth;
@@ -109,6 +109,13 @@ namespace BasicBudget.Models
         public static List<Category> CreateCategory(string categoryName, decimal budget)
         {
             return new List<Category> { new Category(categoryName, budget) };
+        }
+
+
+        public static string getMonthName(int monthNum)
+        {
+            string[] months = { "None", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" };
+            return months[monthNum];
         }
     }
 }
