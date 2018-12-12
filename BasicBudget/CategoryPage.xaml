@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ContentPage 
-             Title="Categories"
+             Title="Budget"
              xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              xmlns:xForms="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
@@ -42,7 +42,7 @@
                 </Grid.ColumnDefinitions>
                     <Label Grid.Column="0" Text="My Categories" Margin="10,0, 0, 0" VerticalTextAlignment="Center"></Label>
                     <Label Grid.Column="1"></Label>
-                    <Button Grid.Column="2" Text=">" TextColor="#31E7CA" FontSize="Large"></Button>
+       
             </Grid>
             
            <StackLayout Grid.Row="3">
@@ -64,7 +64,7 @@
                                     
                                     <StackLayout HeightRequest="25" WidthRequest="250" Orientation="Horizontal">
                                             <Label Text="Budget: " FontSize="15" Margin="5, 0, 0, 0" VerticalOptions="Center"></Label>
-                                            <Label Text="{Binding Budget}" FontSize="15" Margin="0, 0, 0, 0" VerticalOptions="Center"></Label>
+                                            <Label Text="{Binding AmountSpent}" FontSize="15" Margin="0, 0, 0, 0" VerticalOptions="Center"></Label>
                                             <Label Text="|" FontSize="15" Margin="0, 0, 0, 0" VerticalOptions="Center"></Label>
                                             <Label Text="{Binding Budget}" FontSize="20" Margin="0, 0, 0, 0" VerticalOptions="Center" HorizontalTextAlignment="End"></Label>
                                         
@@ -88,8 +88,9 @@
     </ContentPage.Content>
     <ContentPage.ToolbarItems> 
         <ToolbarItem Text="New" Clicked="Handle_Clicked"/>
-        <ToolbarItem Text="Upload" Clicked="Upload_Clicked" />
-        <ToolbarItem Text="Download" Clicked="Download_Clicked"/>
+        
+        <ToolbarItem Text="Storage" Clicked="Storage_Clicked" />
+        
        
     </ContentPage.ToolbarItems>
 </ContentPage>

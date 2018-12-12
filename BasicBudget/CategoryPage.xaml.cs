@@ -83,9 +83,9 @@ namespace BasicBudget
 
 
         // Category clicked.
-        void Handle_ItemSelected(object sender, Xamarin.Forms.SelectedItemChangedEventArgs e)
+        void Handle_ItemSelected(object sender, Xamarin.Forms.ItemTappedEventArgs e)
         {
-            var selectedCategory = e.SelectedItem as Category;
+            var selectedCategory = e.Item as Category;
             Navigation.PushAsync(new CategoryDetailPage(selectedCategory));
         }
 
@@ -95,6 +95,13 @@ namespace BasicBudget
         {
             Navigation.PushAsync(new NewCategoryPage());
         }
+
+        void Storage_Clicked(object sender, System.EventArgs e)
+        {
+            Navigation.PushAsync(new StoragePage());
+        }
+
+
 
 
         void Upload_Clicked(object sender, System.EventArgs e)

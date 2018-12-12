@@ -19,24 +19,20 @@ namespace BasicBudget
             Xamarin.Forms.PlatformConfiguration.iOSSpecific.NavigationPage.
                     SetPrefersLargeTitles(navPage, true);
             MainPage = navPage;
-            //MainPage = new CameraPage();
-            //MainPage = new NavigationPage(new LargeTitleSample());
-            //MainPage = new CategoryPage();
-
 
         }
 
         protected override void OnStart()
         {
             // Handle when your app starts
-            LocalStorage.SaveData();
+
         }
 
         protected override void OnSleep()
         {
             // Handle when your app sleeps
-            
-            
+            //LocalStorage.SaveData();
+
         }
 
         protected override void OnResume()

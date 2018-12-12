@@ -44,6 +44,8 @@
     <Compile Remove="TestData\CategoryData.cs" />
     <Compile Remove="Models\TestManager.cs" />
     <Compile Remove="LargeTitleSample.xaml.cs" />
+    <Compile Remove="AddExpensePage.xaml %28copy%29.cs" />
+    <Compile Remove="DataStoragePage.xaml.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\App.xaml.cs">
@@ -65,5 +67,7 @@
     <EmbeddedResource Remove="Views\EntriesPage.xaml" />
     <EmbeddedResource Remove="EnterCategoryPage.xaml" />
     <EmbeddedResource Remove="LargeTitleSample.xaml" />
+    <EmbeddedResource Remove="AddExpensePage %28copy%29.xaml" />
+    <EmbeddedResource Remove="DataStoragePage.xaml" />
   </ItemGroup>
 </Project>

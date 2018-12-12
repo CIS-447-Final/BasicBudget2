@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="BasicBudget.StoragePage">
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.2*"/>
+                <RowDefinition Height="0.2*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+                <StackLayout Grid.Row ="0">
+                    <Label Text="GUID" FontSize="Small" FontAttributes="Bold" Margin="0, 25, 0, 0" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center" x:Name="GUID"></Label>
+                
+                    <Button BackgroundColor="#31E7CA" Text="Get GUID" FontAttributes="Bold" Margin="25,10,25,50" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand" FontSize="24" TextColor="White" Clicked="GetGUID"></Button>
+                </StackLayout>
+
+            <StackLayout Grid.Row = "1">
+                    <Label Text="Set GUID" FontSize="Small" FontAttributes="Bold" Margin="0, 50, 0, 0" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center"></Label>
+                
+                    <Entry x:Name = "GUIDTextField" Placeholder="Enter New GUID..." Margin="10,0,10,0" HeightRequest="35"/>
+               
+            </StackLayout>
+             <Button Grid.Row="2" BackgroundColor="#31E7CA" Text="Set GUID" FontAttributes="Bold" Margin="25,50,25,50" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand" FontSize="24" TextColor="White" Clicked="SaveGUID"></Button>
+            
+        </Grid>
+    </ContentPage.Content>
+    <ContentPage.ToolbarItems> 
+        <ToolbarItem Text="Upload" Clicked = "Upload_Clicked"/>
+        <ToolbarItem Text="Download" Clicked="Download_Clicked"/>
+    </ContentPage.ToolbarItems>
+</ContentPage>
