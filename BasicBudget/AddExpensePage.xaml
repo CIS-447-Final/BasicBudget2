@@ -20,8 +20,8 @@
             <Button Grid.Row = "2" BackgroundColor="#31E7CA" Text="Done" FontAttributes="Bold" Margin="25,50,25,50" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand" FontSize="24" TextColor="White" Clicked="Handle_Clicked" ></Button>
         </Grid>
     </ContentPage.Content>
-    <ContentPage.ToolbarItems> 
+    <!--<ContentPage.ToolbarItems> 
         <ToolbarItem Text="Camera" x:Name="CameraButton"/>
        
-    </ContentPage.ToolbarItems>
+    </ContentPage.ToolbarItems>-->
 </ContentPage>

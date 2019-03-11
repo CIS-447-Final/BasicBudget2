@@ -16,7 +16,7 @@ namespace BasicBudget.Models
             // Check if local storage is empty or not.
             bool DataExistsInLocalStorage = Application.Current.Properties.ContainsKey("LocalData");
 
-            LocalStorage.SaveGUID();
+            //LocalStorage.SaveGUID();
 
             if (DataExistsInLocalStorage)
             {
@@ -34,7 +34,7 @@ namespace BasicBudget.Models
                 MonthBudgets.Add(currentMonth, new MonthBudget());
                 SelectedMonth = currentMonth;
 
-                LocalStorage.SaveData();
+                //LocalStorage.SaveData();
 
             }
             

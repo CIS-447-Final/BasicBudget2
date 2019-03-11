@@ -14,7 +14,6 @@ namespace BasicBudget.Models
             Time = time;
             Amount = amount;
             MonthName = getMonthName(time.Month);
-
         }
 
         public string getMonthName(int monthNum)
@@ -22,5 +21,7 @@ namespace BasicBudget.Models
             string[] months = {"None", "Jan.", "Feb.", "Mar.", "Apr.", "May", "June", "Jul.", "Aug.", "Sept.", "Oct.", "Nov.", "Dec." };
             return months[monthNum];
         }
+
+        
     }
 }

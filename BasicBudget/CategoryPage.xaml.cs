@@ -56,7 +56,7 @@ namespace BasicBudget
             {
 
                 categoriesTest.Add(category);
-
+                MainLabel.Text += " " + category.Name;
 
             }
 
@@ -64,57 +64,41 @@ namespace BasicBudget
 
         }
 
-        void ShowDownloadData()
-        {
-            ObservableCollection<Category> categoriesTest = new ObservableCollection<Category>();
+        //void ShowDownloadData()
+        //{
+        //    ObservableCollection<Category> categoriesTest = new ObservableCollection<Category>();
 
-            MonthBudget monthBudget = Manager.GetSelectedMonthBudget();
+        //    MonthBudget monthBudget = Manager.GetSelectedMonthBudget();
 
-            foreach (var category in monthBudget.Categories)
-            {
+        //    foreach (var category in monthBudget.Categories)
+        //    {
 
-                categoriesTest.Add(category);
+        //        categoriesTest.Add(category);
 
 
-            }
+        //    }
 
-            categoryListView.ItemsSource = categoriesTest;
-        }
+        //    categoryListView.ItemsSource = categoriesTest;
+        //}
 
 
         // Category clicked.
-        void Handle_ItemSelected(object sender, Xamarin.Forms.ItemTappedEventArgs e)
+        async void Handle_ItemSelected(object sender, ItemTappedEventArgs e)
         {
             var selectedCategory = e.Item as Category;
-            Navigation.PushAsync(new CategoryDetailPage(selectedCategory));
+            await Navigation.PushAsync(new CategoryDetailPage(selectedCategory));
         }
 
 
         // New Category button cliked
-        void Handle_Clicked(object sender, System.EventArgs e)
+        async void Handle_Clicked(object sender, System.EventArgs e)
         {
-            Navigation.PushAsync(new NewCategoryPage());
+            await Navigation.PushAsync(new NewCategoryPage());
         }
 
         void Storage_Clicked(object sender, System.EventArgs e)
         {
-            Navigation.PushAsync(new StoragePage());
-        }
-
-
-
-
-        void Upload_Clicked(object sender, System.EventArgs e)
-        {
-            DatabaseConnection.Upload();
-
-        }
-
-        void Download_Clicked(object sender, System.EventArgs e)
-        {
-            DatabaseConnection.Download();
-            ShowDownloadData();
-
+            //Navigation.PushAsync(new StoragePage());
         }
 
         void Next_Month_ButtonClicker(object sender, System.EventArgs e)

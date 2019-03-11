@@ -15,7 +15,7 @@ namespace BasicBudget
         {
             InitializeComponent();
 
-            CameraButton.Clicked += CameraButton_Clicked;
+            //CameraButton.Clicked += CameraButton_Clicked;
 
             categoryName = category;
         }
@@ -40,18 +40,18 @@ namespace BasicBudget
         }
 
 
-        private async void CameraButton_Clicked(object sender, EventArgs e)
-        {
-            var photo = await Plugin.Media.CrossMedia.Current.TakePhotoAsync(new Plugin.Media.Abstractions.StoreCameraMediaOptions() { CompressionQuality = 80});
+        //private async void CameraButton_Clicked(object sender, EventArgs e)
+        //{
+        //    var photo = await Plugin.Media.CrossMedia.Current.TakePhotoAsync(new Plugin.Media.Abstractions.StoreCameraMediaOptions() { CompressionQuality = 80});
 
-            if(photo != null)
-            {
-                decimal receiptTotal = OCRProgram.TextExtraction(photo.GetStream());
+        //    if(photo != null)
+        //    {
+        //        decimal receiptTotal = OCRProgram.TextExtraction(photo.GetStream());
 
-                // Sets the Expense text field to the total grabbed by the OCR
-                ExpenseTotal.Text = receiptTotal.ToString();
-            }
+        //        // Sets the Expense text field to the total grabbed by the OCR
+        //        ExpenseTotal.Text = receiptTotal.ToString();
+        //    }
 
-        }
+        //}
     }
 }

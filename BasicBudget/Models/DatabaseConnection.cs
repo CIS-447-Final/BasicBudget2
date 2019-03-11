@@ -48,7 +48,7 @@ namespace BasicBudget.Models
                 var dataObjects = response.Content.ReadAsStringAsync().Result;
                 var budgets = JsonConvert.DeserializeObject<Dictionary<DateTime, MonthBudget>>(dataObjects);
                 Manager.MonthBudgets = budgets;
-                LocalStorage.SaveData();
+                //LocalStorage.SaveData();
             }
             else
             {

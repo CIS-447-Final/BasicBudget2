@@ -77,10 +77,10 @@
                 </DataTemplate> 
             </ListView.ItemTemplate>
         </ListView>
-                
-        
-                
-        </StackLayout>
+
+
+                <Label x:Name="MainLabel" Text="Starting Text"/>
+            </StackLayout>
             
             
             
@@ -89,7 +89,10 @@
     <ContentPage.ToolbarItems> 
         <ToolbarItem Text="New" Clicked="Handle_Clicked"/>
         
-        <ToolbarItem Text="Storage" Clicked="Storage_Clicked" />
+        <!--<ToolbarItem Text="Storage" Clicked="Storage_Clicked" />-->
+        
+        
+        
         
        
     </ContentPage.ToolbarItems>

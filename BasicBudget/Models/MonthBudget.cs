@@ -24,10 +24,11 @@ namespace BasicBudget.Models
         {
             foreach (Category categoryToAdd in categoriesToAdd)
             {
+                // Make sure the names of the Catagories are unique
                 if (Categories.Where(cat => cat.Name == categoryToAdd.Name).Count() == 0)
                 {
                     Categories.Add(categoryToAdd);
-                    LocalStorage.SaveData();
+                    //LocalStorage.SaveData();
                 }
             }
         }
@@ -41,7 +42,7 @@ namespace BasicBudget.Models
             var category = Categories.Where(cat => cat.Name == categoryName).FirstOrDefault();
 
             Categories.Remove(category);
-            LocalStorage.SaveData();
+            //LocalStorage.SaveData();
         }
 
         public void AddExpenseToCategory(string categoryName, string expenseName, DateTime time, decimal amount)
@@ -51,7 +52,7 @@ namespace BasicBudget.Models
             Categories.Remove(category);
             category.AddExpense(expenseName, time, amount);
             Categories.Insert(0, category);
-            LocalStorage.SaveData();
+            //LocalStorage.SaveData();
         }
 
         public void DeleteExpenseFromCategory(string categoryName, string expenseName, DateTime time)
@@ -61,7 +62,7 @@ namespace BasicBudget.Models
             Categories.Remove(category);
             category.DeleteExpense(expenseName, time);
             Categories.Insert(0, category);
-            LocalStorage.SaveData();
+            //LocalStorage.SaveData();
         }
     }
 }

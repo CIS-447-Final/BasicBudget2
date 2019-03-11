@@ -32,7 +32,10 @@ namespace BasicBudget
         {
             base.OnAppearing();
 
-            ObservableCollection<Expense> categoriesEntries = new ObservableCollection<Expense>();
+            //ObservableCollection<Expense> categoriesEntries = new ObservableCollection<Expense>();
+
+            // New System
+            ObservableCollection<DBExpense> categoriesEntries = new ObservableCollection<DBExpense>();
 
             foreach (var expense in Category.CategoryExpenses)
             {
@@ -43,18 +46,18 @@ namespace BasicBudget
         }
 
 
-        void AddData(Category category)
-        {
+        //void AddData(Category category)
+        //{
 
             
-            foreach (var expense in category.CategoryExpenses)
-            {
-                categoriesEntries.Add(expense);
+        //    foreach (var expense in category.CategoryExpenses)
+        //    {
+        //        categoriesEntries.Add(expense);
 
-            }
+        //    }
 
-            expenseListView.ItemsSource = categoriesEntries;
-        }
+        //    expenseListView.ItemsSource = categoriesEntries;
+        //}
 
         // New Category button cliked
         void Handle_Clicked(object sender, System.EventArgs e)
@@ -62,11 +65,19 @@ namespace BasicBudget
             Navigation.PushAsync(new AddExpensePage(Category));
         }
 
-        void DeleteCategoryButton_Clicked(object sender, System.EventArgs e)
+        async void DeleteCategoryButton_Clicked(object sender, System.EventArgs e)
         {
+            bool deleteCatagory = await DisplayAlert("Delete Category", "Are you sure you want to delete this category?", "Delete", "Cancel");
+
+            if (!deleteCatagory)
+            {
+                // User canceled action. Do not delete catagory
+                return;
+            }
+
             MonthBudget mb = Manager.GetSelectedMonthBudget();
             mb.DeleteCategory(Category.Name);
-            Navigation.PopAsync();
+            await Navigation.PopAsync();
         }
 
         void DeleteExpenseButton_Clicked(object sender, System.EventArgs e)
@@ -77,19 +88,28 @@ namespace BasicBudget
             //mb.DeleteExpenseFromCategory(Category.Name, test, DateTime.Parse(TimeDate.Text));
         }
 
-
-        void ExpenseTapped(object sender, Xamarin.Forms.SelectedItemChangedEventArgs e)
+        async void ExpenseTapped(object sender, EventArgs e)
         {
+            ListView lv = (ListView)sender;
+            DBExpense selectedExpense = (DBExpense)lv.SelectedItem;
+            lv.SelectedItem = null;
 
+            bool deleteExpense= await DisplayAlert("Delete Expense", "Are you sure you want to delete this expense?", "Delete", "Cancel");
+            
+            if (!deleteExpense)
+            {
+                // User canceled action. Do not delete expesne
+                return;
+            }
 
-            var selectedExpense = e.SelectedItem as Expense;
+            DeleteSelectedExpense(selectedExpense);
+        }
 
-
+        async void DeleteSelectedExpense(DBExpense selectedExpense)
+        {
             MonthBudget mb = Manager.GetSelectedMonthBudget();
             mb.DeleteExpenseFromCategory(Category.Name, selectedExpense.Name, selectedExpense.Time);
-            Navigation.PopAsync();
-
-
+            await Navigation.PopAsync();
         }
     }
 }
