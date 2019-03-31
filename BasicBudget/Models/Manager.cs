@@ -14,16 +14,21 @@ namespace BasicBudget.Models
         static Manager()
         {
             // Check if local storage is empty or not.
-            bool DataExistsInLocalStorage = Application.Current.Properties.ContainsKey("LocalData");
+            List<DBMonthBudget> monthBudgetList = App.DB.GetMonthBudgets().Result;
 
-            //LocalStorage.SaveGUID();
-
-            if (DataExistsInLocalStorage)
+            if (monthBudgetList != null)
             {
                 // Load the data to MonthBudgets and set SelectedMonths to the current month (based on the system time).
-                MonthBudgets = LocalStorage.GetDictData();
-                SelectedMonth = GetCurrentMonthAsDateTime();
+                var mbList = new Dictionary<DateTime, MonthBudget>();
 
+                foreach(var mb in monthBudgetList)
+                {
+                    MonthBudget newMonthBudget = new MonthBudget(mb.IdGUID);
+                    mbList.Add(newMonthBudget.Month, newMonthBudget);
+                }
+
+                MonthBudgets = mbList;
+                SelectedMonth = GetCurrentMonthAsDateTime();
             }
             else
             {
@@ -31,14 +36,9 @@ namespace BasicBudget.Models
                 MonthBudgets = new Dictionary<DateTime, MonthBudget>();
                 var currentMonth = GetCurrentMonthAsDateTime();
 
-                MonthBudgets.Add(currentMonth, new MonthBudget());
+                MonthBudgets.Add(currentMonth, new MonthBudget(currentMonth));
                 SelectedMonth = currentMonth;
-
-                //LocalStorage.SaveData();
-
             }
-            
-            
         }
 
         private static DateTime GetCurrentMonthAsDateTime()
@@ -52,7 +52,7 @@ namespace BasicBudget.Models
 
             if (!MonthBudgets.Keys.Contains(adjacentMonth))
             {
-                MonthBudgets.Add(adjacentMonth, new MonthBudget());
+                MonthBudgets.Add(adjacentMonth, new MonthBudget(adjacentMonth));
             }
 
             return adjacentMonth;
@@ -79,7 +79,7 @@ namespace BasicBudget.Models
 
         public static void ChangeSelectedMonthIncome(decimal newIncome)
         {
-            MonthBudgets[SelectedMonth].Income = newIncome;
+            MonthBudgets[SelectedMonth].SetIncome(newIncome);
         }
 
         public static void TransferForwardIncome()
@@ -88,7 +88,8 @@ namespace BasicBudget.Models
 
             VerifyAdjacentMonthExists();
 
-            MonthBudgets[nextMonth].Income = MonthBudgets[SelectedMonth].Income;
+            var lastMonthIncome = MonthBudgets[SelectedMonth].Income;
+            MonthBudgets[nextMonth].SetIncome(lastMonthIncome);
         }
 
         public static void TransferForwardCategory(Category categoryToTransfer)

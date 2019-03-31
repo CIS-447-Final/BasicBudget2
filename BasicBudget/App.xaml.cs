@@ -19,8 +19,12 @@ namespace BasicBudget
             CreateDBConnection();
 
             var navPage = new NavigationPage(new CategoryPage());
-            Xamarin.Forms.PlatformConfiguration.iOSSpecific.NavigationPage.
-                    SetPrefersLargeTitles(navPage, true);
+            //navPage.BarBackgroundColor = Color.FromHex("31E7CA");
+
+
+
+            Xamarin.Forms.PlatformConfiguration.iOSSpecific.NavigationPage.SetPrefersLargeTitles(navPage, true);
+
             MainPage = navPage;
 
         }
@@ -29,20 +33,19 @@ namespace BasicBudget
         {
             string dbFile = "InspectionsDB.db3";
             string dbPath = string.Empty;
-#if __IOS__
-        string docPath = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
-        string libPath = System.IO.Path.Combine(docPath, "..", "Library");
-        var dbPath = System.IO.Path.Combine(libPath, dbFile);
-#elif ANDROID
-            string docPath = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
-            var dbPath = System.IO.Path.Combine(docPath, dbFile);
-#endif
-            //string docPath = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
-            //string libPath = System.IO.Path.Combine(docPath, "..", "Library");
-            //dbPath = System.IO.Path.Combine(libPath, dbFile);
 
-            string docPath = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
-            dbPath = System.IO.Path.Combine(docPath, dbFile);
+            switch (Device.RuntimePlatform)
+            {
+                case Device.iOS:
+                    string documentPath = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
+                    string libPath = System.IO.Path.Combine(documentPath, "..", "Library");
+                    dbPath = System.IO.Path.Combine(libPath, dbFile);
+                    break;
+                case Device.Android:
+                    string documentPath2 = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
+                    dbPath = System.IO.Path.Combine(documentPath2, dbFile);
+                    break;
+            }
 
             DB = new MyDatabase(dbPath);
         }

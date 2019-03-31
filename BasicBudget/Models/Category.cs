@@ -1,13 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows.Input;
+using Xamarin.Forms;
 
 namespace BasicBudget.Models
 {
     public class Category
     {
+        public string CatGUID { get; set; }
         public string Name { get; set; }
         public decimal Budget { get; set; }
+        public DateTime LastModified { get; set; }
         public decimal AmountSpent
         {
             get
@@ -23,19 +27,33 @@ namespace BasicBudget.Models
             }
         }
 
-       // public List<Expense> CategoryExpenses = new List<Expense>();
-
-        // New System
-        public List<DBExpense> CategoryExpenses = new List<DBExpense>();
-
-        public Category(string name, decimal budget)
+        public bool IsOverBudget
         {
+            get
+            {
+                return AmountSpent > Budget ? true : false;
+            }
+        }
+
+        public ICommand TransferCategoryCommand { get; }
+
+        public List<DBExpense> CategoryExpenses = new List<DBExpense>();
+      
+
+
+        public Category(string name, decimal budget, string catGUID = null, DateTime lastModified = default(DateTime))
+        {
+            CatGUID = catGUID ?? Guid.NewGuid().ToString();
             Name = name;
             Budget = budget;
+            LastModified = lastModified == default(DateTime) ? DateTime.Now : lastModified;
+            CategoryExpenses = App.DB.GetExpensesInCatagory(this.CatGUID).Result;
 
-            // New system
-            CategoryExpenses = App.DB.GetExpensesInCatagory(this.Name).Result;
+            // Button associated with this event on the CategoryPage
+            TransferCategoryCommand = new Command(TransferCategory);
         }
+
+        
 
         /// <summary>
         /// Adds an expense to the category.
@@ -52,9 +70,13 @@ namespace BasicBudget.Models
             {
                 Name = name,
                 Time = time,
+                MonthName = String.Format("{0:MMM}", time),
                 Amount = amount,
-                AssociatedCatagoryName = this.Name,
+                AssociatedCatagoryGUID = this.CatGUID,
             };
+
+            // The category has been modified now
+            LastModified = DateTime.Now;
 
             CategoryExpenses.Add(expense);
             App.DB.SaveExpenseAsync(expense);
@@ -80,9 +102,11 @@ namespace BasicBudget.Models
 
                 CategoryExpenses.Remove(result);
 
-                // New System
                 // Delete from SQLite storage
                 var num = await App.DB.DeleteExpenseAsync(result);
+
+                // The category has been modified now
+                LastModified = DateTime.Now;
             }
             catch (ArgumentNullException)
             {
@@ -93,14 +117,11 @@ namespace BasicBudget.Models
                 {
                     Name = name,
                     Time = time,
+                    MonthName = String.Format("{0:MMM}", time),
                     Amount = 0,
-                    AssociatedCatagoryName = this.Name,
+                    AssociatedCatagoryGUID = this.CatGUID,
                 };
-
-                //return expense;
             }
-
-            //return result;
         }
 
         /// <summary>
@@ -133,6 +154,14 @@ namespace BasicBudget.Models
             {
                 CategoryExpenses.Sort((a, b) => b.Time.CompareTo(a.Time));
             }
+        }
+
+        /// <summary>
+        /// Transfers the category which was clicked on the CategoryPage to the next month
+        /// </summary>
+        private void TransferCategory()
+        {
+            Manager.TransferForwardCategory(this);
         }
     }
 }

@@ -12,14 +12,15 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.ProjectOxford.Vision" Version="1.0.393" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
+    <PackageReference Include="PropertyChanged.Fody" Version="2.6.0" />
     <PackageReference Include="sqlite-net-pcl" Version="1.5.231" />
     <PackageReference Include="Xam.Plugin.Media" Version="4.0.1.5" />
-    <PackageReference Include="Xamarin.Forms" Version="3.4.0.1008975" />
+    <PackageReference Include="Xamarin.Forms" Version="3.6.0.220655" />
     <PackageReference Include="Syncfusion.Xamarin.SfListView" Version="16.3.0.36" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Views\" />
     <Folder Include="Behaviors\" />
+    <Folder Include="PageModels\" />
     <Folder Include="TestData\" />
   </ItemGroup>
   <ItemGroup>
@@ -27,7 +28,6 @@
     <Compile Remove="Behaviors\NumericEntryBehavior.cs" />
     <Compile Remove="Views\EditExpensePage.xaml.cs" />
     <Compile Remove="CameraPage1.xaml.cs" />
-    <Compile Remove="Views\CameraPage.xaml.cs" />
     <Compile Remove="Views\CategoriesPage.xaml.cs" />
     <Compile Remove="Views\EntryPage.xaml.cs" />
     <Compile Remove="Views\HomePage.xaml.cs" />
@@ -49,18 +49,17 @@
     <Compile Remove="DataStoragePage.xaml.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\App.xaml.cs">
+    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="NewCategoryPage.xaml.cs">
+    <Compile Update="Unused Views\NewCategoryPage.xaml.cs">
       <DependentUpon>NewCategoryPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Remove="Views\EditExpensePage.xaml" />
     <EmbeddedResource Remove="CameraPage1.xaml" />
-    <EmbeddedResource Remove="Views\CameraPage.xaml" />
     <EmbeddedResource Remove="Views\EntryPage.xaml" />
     <EmbeddedResource Remove="Views\HomePage.xaml" />
     <EmbeddedResource Remove="CameraPg.xaml" />

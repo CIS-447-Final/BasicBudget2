@@ -15,12 +15,13 @@ namespace BasicBudget.Models
         public DateTime Time { get; set; }
         public decimal Amount { get; set; }
         public string MonthName { get; set; }
-        public string AssociatedCatagoryName { get; set; }
+        public string AssociatedCatagoryGUID { get; set; }
 
         public DBExpense()
         {
-            string[] months = { "None", "Jan.", "Feb.", "Mar.", "Apr.", "May", "June", "Jul.", "Aug.", "Sept.", "Oct.", "Nov.", "Dec." };
-            MonthName = months[(int)Time.Month];
+            //string[] months = { "None", "Jan.", "Feb.", "Mar.", "Apr.", "May", "June", "Jul.", "Aug.", "Sept.", "Oct.", "Nov.", "Dec." };
+            //MonthName = months[Time.Month];
+            //MonthName = Time.Month.ToString("MMM");
         }
     }
 }
