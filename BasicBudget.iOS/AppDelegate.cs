@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 using Foundation;
+using Plugin.GoogleAnalytics;
 using UIKit;
 
 namespace BasicBudget.iOS
@@ -22,10 +23,12 @@ namespace BasicBudget.iOS
         //
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
+
             global::Xamarin.Forms.Forms.Init();
             LoadApplication(new App());
 
-
+            App.ScreenHeight = (int)UIScreen.MainScreen.Bounds.Height;
+            App.ScreenWidth = (int)UIScreen.MainScreen.Bounds.Width;
 
             return base.FinishedLaunching(app, options);
         }

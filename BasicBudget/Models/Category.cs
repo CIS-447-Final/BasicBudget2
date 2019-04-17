@@ -19,11 +19,11 @@ namespace BasicBudget.Models
                 return CategoryExpenses.Sum((expense) => expense.Amount);
             }
         }
-        public decimal PercentRemaining
+        public decimal Percent
         {
             get
             {
-                return 1m - (AmountSpent / Budget);
+                return (AmountSpent / Budget);
             }
         }
 
@@ -32,6 +32,14 @@ namespace BasicBudget.Models
             get
             {
                 return AmountSpent > Budget ? true : false;
+            }
+        }
+
+        public Color ProgressBarColor
+        {
+            get
+            {
+                return CalculateProgressBarColor();
             }
         }
 
@@ -162,6 +170,29 @@ namespace BasicBudget.Models
         private void TransferCategory()
         {
             Manager.TransferForwardCategory(this);
+        }
+
+        private Color CalculateProgressBarColor()
+        {
+            float ratio = (float)(AmountSpent / Budget);
+
+            Color pbColor = Color.Default;
+
+            if (ratio <= 0.5)
+            {
+                pbColor = Color.Green;
+            }
+            else if (ratio <= 0.75)
+            {
+                pbColor = Color.Orange;
+            }
+            else
+            {
+                pbColor = Color.IndianRed;
+            }
+
+
+            return pbColor;
         }
     }
 }

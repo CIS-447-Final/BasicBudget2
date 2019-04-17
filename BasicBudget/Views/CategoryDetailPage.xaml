@@ -34,53 +34,58 @@
                 <StackLayout Grid.Row="0" Grid.Column="1" BackgroundColor="#F9F9F9" Margin="0,7,0,0" Spacing="0">
 
                     <Label Text="Expenses" 
-                               FontSize="Medium"
-                               VerticalOptions="FillAndExpand"
-                               HorizontalOptions="FillAndExpand"
-                               HorizontalTextAlignment="Center"
-                               VerticalTextAlignment="Center"
-                               BackgroundColor="#F9F9F9"
-                               Margin="0,5,0,0"/>
+                            FontSize="Medium"
+                            VerticalOptions="FillAndExpand"
+                            HorizontalOptions="FillAndExpand"
+                            HorizontalTextAlignment="Center"
+                            VerticalTextAlignment="Center"
+                            BackgroundColor="#F9F9F9"
+                            Margin="0,5,0,0"/>
+                    
 
                     <StackLayout Orientation="Horizontal" Margin="0,10,0,5" VerticalOptions="Center" HorizontalOptions="Center">
 
                         <Button Text="A-Z" 
+                                TextColor="#F9F9F9"
                                 Clicked="Sort_ByExpenseName" 
                                 WidthRequest="40" 
                                 HeightRequest="30"
                                 VerticalOptions="Center" 
                                 HorizontalOptions="Center" 
-                                BackgroundColor="#31E7CA" 
+                                BackgroundColor="MediumSeaGreen" 
                                 Margin="0" 
                                 Padding="0"/>
 
                         <Button Text="$$-$" 
+                                TextColor="#F9F9F9"
                                 Clicked="Sort_ByExpenseAmount" 
                                 WidthRequest="45" 
                                 HeightRequest="30"
                                 VerticalOptions="Center" 
                                 HorizontalOptions="Center" 
-                                BackgroundColor="#31E7CA" 
+                                BackgroundColor="MediumSeaGreen" 
                                 Margin="0" 
                                 Padding="0"/>
 
                         <Button Text="New" 
+                                TextColor="#F9F9F9"
                                 Clicked="Sort_ByNewest" 
                                 WidthRequest="40" 
                                 HeightRequest="30"
                                 VerticalOptions="Center" 
                                 HorizontalOptions="Center" 
-                                BackgroundColor="#31E7CA" 
+                                BackgroundColor="MediumSeaGreen" 
                                 Margin="0" 
                                 Padding="0"/>
 
                         <Button Text="Old" 
+                                TextColor="#F9F9F9"
                                 Clicked="Sort_ByOldest" 
                                 WidthRequest="40" 
                                 HeightRequest="30"
                                 VerticalOptions="Center" 
                                 HorizontalOptions="Center" 
-                                BackgroundColor="#31E7CA" 
+                                BackgroundColor="MediumSeaGreen" 
                                 Margin="0" 
                                 Padding="0"/>
 
@@ -137,7 +142,7 @@
                                         />
 
                                     <Label Text="{Binding Amount}" Grid.Row="0"
-                                        FontSize="30" 
+                                        FontSize="20" 
                                         TextColor="Red" 
                                         Grid.Column="2" 
                                         HorizontalTextAlignment="End" 
@@ -152,7 +157,7 @@
 
 
                 <!--Add new expense section-->
-                <StackLayout Grid.Row="2" Grid.Column="1" Orientation="Horizontal" BackgroundColor="#31E7CA">
+                <StackLayout Grid.Row="2" Grid.Column="1" Orientation="Horizontal" BackgroundColor="MediumSeaGreen">
 
                     <Label Text="Expense:" 
                             FontSize="Small" 
@@ -160,30 +165,30 @@
                             VerticalTextAlignment="Center"
                             HorizontalTextAlignment="Center"
                             Margin="5, 0, 0, 0"
-                           TextColor="Black"/>
+                           TextColor="#F9F9F9"/>
 
 
                     <Entry x:Name="ExpenseText" 
                             Placeholder="Name..." 
-                           PlaceholderColor="DarkSlateGray"
-                            Margin="5,0,0,0" 
+                           PlaceholderColor="{OnPlatform Android=White, iOS=DarkSlateGray}"
+                           TextColor="{OnPlatform Android=White, iOS=Black}"
+                            Margin="{OnPlatform Android='5,0,5,0', iOS='5,5,5,5'}"
+                           HorizontalOptions="FillAndExpand"
                             VerticalOptions="Center"
                            HorizontalTextAlignment="Center"
                            MaxLength="15"/>
 
-                    <Entry x:Name="ExpenseTotal" 
+                    <views:ExtendedNumericEntry x:Name="ExpenseTotal" 
                             Placeholder="Budget..." 
-                           PlaceholderColor="DarkSlateGray"
+                           PlaceholderColor="{OnPlatform Android=White, iOS=DarkSlateGray}"
+                           TextColor="{OnPlatform Android=White, iOS=Black}"
                             VerticalOptions="Center"
-                            Margin="5,0,10,0" 
+                            Margin="0,0,5,0" 
+                            HorizontalOptions="FillAndExpand"
                             Keyboard="Numeric"
                            HorizontalTextAlignment="Center"
-                           MaxLength="6"/>
-
-                    <Button Text="Add" 
-                            TextColor="Black" 
-                            FontSize="Medium" 
-                            Clicked="AddNewCategory_Button_Click"/>
+                           MaxLength="10"
+                           Unfocused="AddNewExpense_Button_Click"/>
 
                 </StackLayout>
             </Grid>
@@ -193,7 +198,8 @@
     </ContentPage.Content>
     <ContentPage.ToolbarItems> 
         <!--<ToolbarItem Text="New Expense" Clicked="Handle_Clicked"/>-->
-        <ToolbarItem Text="Delete Category" Clicked="DeleteCategoryButton_Clicked" />
+        <ToolbarItem Text="Delete Category" Priority="1" Icon="trash.png" Clicked="DeleteCategoryButton_Clicked" />
+        
        
     </ContentPage.ToolbarItems>
     

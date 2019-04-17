@@ -2,8 +2,7 @@
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using BasicBudget.Models;
-
-
+using BasicBudget.Interfaces;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace BasicBudget
@@ -12,14 +11,22 @@ namespace BasicBudget
     {
         public static MyDatabase DB;
 
+        public static string AdId;
+        public static string AnalyticsId = "UA-138340968-2";
+        public static bool DisplayAd = true;
+        public static int ScreenHeight { get; set; }
+        public static int ScreenWidth { get; set; }
+
         public App()
         {
             InitializeComponent();
 
             CreateDBConnection();
+            SetupAdId();
 
             var navPage = new NavigationPage(new CategoryPage());
-            //navPage.BarBackgroundColor = Color.FromHex("31E7CA");
+            navPage.BarBackgroundColor = Color.MediumSeaGreen;
+            navPage.BarTextColor = Color.FromHex("#F9F9F9");
 
 
 
@@ -31,7 +38,7 @@ namespace BasicBudget
 
         private void CreateDBConnection()
         {
-            string dbFile = "InspectionsDB.db3";
+            string dbFile = "BudgetDB.db3";
             string dbPath = string.Empty;
 
             switch (Device.RuntimePlatform)
@@ -50,8 +57,28 @@ namespace BasicBudget
             DB = new MyDatabase(dbPath);
         }
 
+        private void SetupAdId()
+        {
+            switch (Device.RuntimePlatform)
+            {
+                case Device.iOS:
+                    AdId = "ca-app-pub-4714555194826660/6951351460";
+
+                    // This is the test ad id for ios
+                    //AdId = "ca-app-pub-3940256099942544/4411468910";
+                    break;
+                case Device.Android:
+                    //AdId = "ca-app-pub-4714555194826660/4278906929";
+
+                    // This is the test ad id for android.
+                     AdId = "ca-app-pub-3940256099942544/1033173712";
+                    break;
+            }
+        }
+
         protected override void OnStart()
         {
+
             // Handle when your app starts
 
         }

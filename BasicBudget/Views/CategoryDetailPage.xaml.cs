@@ -5,7 +5,7 @@ using Xamarin.Forms;
 using System.Collections.Generic;
 using System.Linq;
 using PropertyChanged;
-
+using BasicBudget.Interfaces;
 
 namespace BasicBudget
 {
@@ -25,7 +25,15 @@ namespace BasicBudget
             Category = category;
 
             Title = category.Name;
-      
+
+            if (Device.RuntimePlatform == Device.iOS)
+            {
+                ExpenseText.HeightRequest = 25;
+                ExpenseTotal.HeightRequest = 25;
+            }
+
+            
+
         }
 
         public CategoryDetailPage()
@@ -33,10 +41,35 @@ namespace BasicBudget
             InitializeComponent();
         }
 
-        protected override void OnAppearing()
+        protected override async void OnAppearing()
         {
             base.OnAppearing();
             DisplayExpenseList();
+
+            // Google Analtyics
+            var analyticsManager = DependencyService.Get<IAnalyticsManager>();
+            analyticsManager.InitWithId(App.AnalyticsId);
+            analyticsManager.TrackScreen(ScreenName.ExpensePage);
+
+            // Only load an ad once per time they open the app.
+            if (App.DisplayAd)
+            {
+                // Display an interstitial ad
+                await DependencyService.Get<IAdmobInterstitialAds>().LoadAd(App.AdId);
+            }
+        }
+
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
+
+            // Only display an ad once per time they open the app.
+            if (App.DisplayAd)
+            {
+                // Display an interstitial ad
+                DependencyService.Get<IAdmobInterstitialAds>().DisplayAd();
+                App.DisplayAd = false;
+            }
         }
 
         void DisplayExpenseList(List<DBExpense> expenses = null)
@@ -47,12 +80,6 @@ namespace BasicBudget
             {
                 ExpenseList.Add(expense);
             }
-        }
-
-        // New Category button cliked
-        void Handle_Clicked(object sender, System.EventArgs e)
-        {
-            Navigation.PushAsync(new AddExpensePage(Category));
         }
 
         async void DeleteCategoryButton_Clicked(object sender, System.EventArgs e)
@@ -68,14 +95,6 @@ namespace BasicBudget
             MonthBudget mb = Manager.GetSelectedMonthBudget();
             mb.DeleteCategory(Category.Name);
             await Navigation.PopAsync();
-        }
-
-        void DeleteExpenseButton_Clicked(object sender, System.EventArgs e)
-        {
-
-            //MonthBudget mb = Manager.GetSelectedMonthBudget();
-            //string test = ExpenseName.Text;
-            //mb.DeleteExpenseFromCategory(Category.Name, test, DateTime.Parse(TimeDate.Text));
         }
 
         async void ExpenseTapped(object sender, EventArgs e)
@@ -98,7 +117,7 @@ namespace BasicBudget
         }
 
         //GenerateAssemblyInfo 
-        public void AddNewCategory_Button_Click(object sender, EventArgs e)
+        public void AddNewExpense_Button_Click(object sender, EventArgs e)
         {
             if (!string.IsNullOrEmpty(ExpenseText.Text) && !string.IsNullOrEmpty(ExpenseTotal.Text))
             {
@@ -156,11 +175,12 @@ namespace BasicBudget
 
 
 
-        async void DeleteSelectedExpense(DBExpense selectedExpense)
+        void DeleteSelectedExpense(DBExpense selectedExpense)
         {
             MonthBudget mb = Manager.GetSelectedMonthBudget();
             mb.DeleteExpenseFromCategory(Category.Name, selectedExpense.Name, selectedExpense.Time);
-            await Navigation.PopAsync();
+            //await Navigation.PopAsync();
+            DisplayExpenseList();
         }
     }
 }

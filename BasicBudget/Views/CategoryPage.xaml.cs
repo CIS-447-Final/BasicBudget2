@@ -7,6 +7,8 @@ using System.Collections.Generic;
 using System;
 using System.Windows.Input;
 using PropertyChanged;
+using BasicBudget.Interfaces;
+
 namespace BasicBudget
 {
     [AddINotifyPropertyChangedInterface]
@@ -19,6 +21,7 @@ namespace BasicBudget
         public decimal CategoryBudgetTotal { get; set; }
         public bool IsExpenseSumOverIncome { get; set; }
         public bool IsCategorySumOverIncome { get; set; }
+        public int ListViewHeight { get; set; }
 
 
         //private CategoryPageModel CategoryPM;
@@ -32,14 +35,29 @@ namespace BasicBudget
             SetMonthIncomeText();
             SetMonthText();
 
+            if(Device.RuntimePlatform == Device.iOS)
+            {
+                CategoryName.HeightRequest = 25;
+                CategoryExpense.HeightRequest = 25;
+            }
+
+
             
+
         }
 
 
         protected override void OnAppearing()
         {
             base.OnAppearing();
+            ListViewHeight = (int)(App.ScreenHeight / 1.5);
             DisplayCategoryList();
+
+            // Google Analtyics
+            var analyticsManager = DependencyService.Get<IAnalyticsManager>();
+            analyticsManager.InitWithId(App.AnalyticsId);
+            analyticsManager.TrackScreen(ScreenName.CategoryPage);
+
         }
 
         void DisplayCategoryList()
@@ -84,18 +102,8 @@ namespace BasicBudget
         {
             var selectedCategory = e.Item as Category;
             await Navigation.PushAsync(new CategoryDetailPage(selectedCategory));
-        }
 
-
-        // New Category button cliked
-        async void Handle_Clicked(object sender, System.EventArgs e)
-        {
-            await Navigation.PushAsync(new NewCategoryPage());
-        }
-
-        void Storage_Clicked(object sender, System.EventArgs e)
-        {
-            //Navigation.PushAsync(new StoragePage());
+            ((ListView)sender).SelectedItem = null;
         }
 
         void Next_Month_ButtonClicker(object sender, System.EventArgs e)
@@ -118,9 +126,9 @@ namespace BasicBudget
             //SetMonthIncomeText();
         }
 
-        private void Transfer_Category_Forward_Clicked(object sender, EventArgs e)
+        private async void Transfer_Category_Forward_Clicked(object sender, EventArgs e)
         {
-            DisplayAlert("Category Transfered", "Category transfered to next month.", "Ok");
+            await DisplayAlert("Category Transfered", "Category transfered to next month.", "Ok");
         }
 
 
@@ -128,6 +136,8 @@ namespace BasicBudget
         {
             if (!string.IsNullOrEmpty(CategoryName.Text) && !string.IsNullOrEmpty(CategoryExpense.Text))
             {
+                // Hide Keyboard
+                //DependencyService.Get<IKeyboardHelper>().HideKeyboard();
                 // Create the category
                 var cat = Manager.CreateCategory(CategoryName.Text, decimal.Parse(CategoryExpense.Text));
                 Manager.MonthBudgets[Manager.SelectedMonth].AddCategories(cat);
@@ -137,7 +147,11 @@ namespace BasicBudget
                 CategoryExpense.Text = string.Empty;
 
                 // Display the added category
-                DisplayCategoryList();
+                CurrentCategories.Add(cat[0]);
+                Sort_ByLastModified(sender, e);
+
+                // Recalculate the category total
+                CalculateRemainingAmount();
             }
         }
 

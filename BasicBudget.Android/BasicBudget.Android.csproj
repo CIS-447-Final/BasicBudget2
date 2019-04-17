@@ -55,14 +55,24 @@
     <PackageReference Include="sqlite-net-pcl">
       <Version>1.5.231</Version>
     </PackageReference>
-    <PackageReference Include="Xamarin.Forms" Version="3.6.0.220655" />
+    <PackageReference Include="Xamarin.Forms" Version="3.6.0.264807" />
     <PackageReference Include="Xamarin.Android.Support.Design" Version="27.0.2.1" />
     <PackageReference Include="Xamarin.Android.Support.v7.AppCompat" Version="27.0.2.1" />
     <PackageReference Include="Xamarin.Android.Support.v4" Version="27.0.2.1" />
     <PackageReference Include="Xamarin.Android.Support.v7.CardView" Version="27.0.2.1" />
     <PackageReference Include="Xamarin.Android.Support.v7.MediaRouter" Version="27.0.2.1" />
+    <PackageReference Include="Xamarin.GooglePlayServices.Ads.Lite">
+      <Version>60.1142.1</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.GooglePlayServices.Analytics">
+      <Version>60.1142.1</Version>
+    </PackageReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdmobInterstitial.cs" />
+    <Compile Include="AndroidExtendedViewCell.cs" />
+    <Compile Include="CustomProgressBarRenderer.cs" />
+    <Compile Include="GoogleAnalyticsImplementation.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -105,7 +115,9 @@
     <AndroidResource Include="Resources\drawable-xxxhdpi\nowplaying_movies.png" />
     <AndroidResource Include="Resources\drawable-xxxhdpi\upcoming_movies.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\trash.png" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BasicBudget\BasicBudget.csproj">
       <Project>{788E4F6E-6C1A-4059-A109-68F62A8DF096}</Project>
