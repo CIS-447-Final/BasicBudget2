@@ -54,21 +54,9 @@ namespace BasicBudget
             // Only load an ad once per time they open the app.
             if (App.DisplayAd)
             {
+                App.DisplayAd = false;
                 // Display an interstitial ad
                 await DependencyService.Get<IAdmobInterstitialAds>().LoadAd(App.AdId);
-            }
-        }
-
-        protected override void OnDisappearing()
-        {
-            base.OnDisappearing();
-
-            // Only display an ad once per time they open the app.
-            if (App.DisplayAd)
-            {
-                // Display an interstitial ad
-                DependencyService.Get<IAdmobInterstitialAds>().DisplayAd();
-                App.DisplayAd = false;
             }
         }
 

@@ -51,18 +51,12 @@ namespace BasicBudget.Droid
                     }
                 };
 
-                //Android.Gms.Ads.AdRequest.Builder requestBuilder = new Android.Gms.Ads.AdRequest.Builder();
+                Android.Gms.Ads.AdRequest.Builder requestBuilder = new Android.Gms.Ads.AdRequest.Builder();
                 AdInterstitial.AdListener = adInterstitialListener;
-                //AdInterstitial.LoadAd(requestBuilder.Build());
+                AdInterstitial.LoadAd(requestBuilder.Build());
             }
 
             return Task.WhenAll(displayTask.Task);
-        }
-
-        public void DisplayAd()
-        {
-            Android.Gms.Ads.AdRequest.Builder requestBuilder = new Android.Gms.Ads.AdRequest.Builder();
-            AdInterstitial.LoadAd(requestBuilder.Build());
         }
 
 

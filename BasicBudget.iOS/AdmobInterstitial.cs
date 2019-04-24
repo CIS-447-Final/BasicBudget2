@@ -52,15 +52,9 @@ namespace BasicBudget.iOS
                 displayAdTask = null;
             };
 
-            //var request = Request.GetDefaultRequest();
-            //interstitial.LoadRequest(request);
-            return Task.WhenAll(displayAdTask.Task);
-        }
-
-        public void DisplayAd()
-        {
             var request = Request.GetDefaultRequest();
             interstitial.LoadRequest(request);
+            return Task.WhenAll(displayAdTask.Task);
         }
     }
 }

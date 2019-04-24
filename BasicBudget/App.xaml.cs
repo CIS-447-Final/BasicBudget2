@@ -68,10 +68,10 @@ namespace BasicBudget
                     //AdId = "ca-app-pub-3940256099942544/4411468910";
                     break;
                 case Device.Android:
-                    //AdId = "ca-app-pub-4714555194826660/4278906929";
+                    AdId = "ca-app-pub-4714555194826660/4278906929";
 
                     // This is the test ad id for android.
-                     AdId = "ca-app-pub-3940256099942544/1033173712";
+                     //AdId = "ca-app-pub-3940256099942544/1033173712";
                     break;
             }
         }

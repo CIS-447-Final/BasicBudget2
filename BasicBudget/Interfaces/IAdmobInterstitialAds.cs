@@ -8,6 +8,5 @@ namespace BasicBudget.Interfaces
     public interface IAdmobInterstitialAds
     {
         Task LoadAd(string adId);
-        void DisplayAd();
     }
 }
