@@ -3,13 +3,28 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using BasicBudget.Models;
 using BasicBudget.Interfaces;
+using System.IO;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace BasicBudget
 {
     public partial class App : Application
     {
-        public static MyDatabase DB;
+
+        static MyDatabase database;
+
+        public static MyDatabase DB
+        {
+            get
+            {
+                if (database == null)
+                {
+                    database = new MyDatabase(
+                      Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "BudgetDB.db3"));
+                }
+                return database;
+            }
+        }
 
         public static string AdId;
         public static string AnalyticsId = "UA-138340968-2";
@@ -21,8 +36,8 @@ namespace BasicBudget
         {
             InitializeComponent();
 
-            CreateDBConnection();
-            SetupAdId();
+            //CreateDBConnection();
+            //SetupAdId();
 
             var navPage = new NavigationPage(new CategoryPage());
             navPage.BarBackgroundColor = Color.MediumSeaGreen;
@@ -36,26 +51,7 @@ namespace BasicBudget
 
         }
 
-        private void CreateDBConnection()
-        {
-            string dbFile = "BudgetDB.db3";
-            string dbPath = string.Empty;
-
-            switch (Device.RuntimePlatform)
-            {
-                case Device.iOS:
-                    string documentPath = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
-                    string libPath = System.IO.Path.Combine(documentPath, "..", "Library");
-                    dbPath = System.IO.Path.Combine(libPath, dbFile);
-                    break;
-                case Device.Android:
-                    string documentPath2 = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
-                    dbPath = System.IO.Path.Combine(documentPath2, dbFile);
-                    break;
-            }
-
-            DB = new MyDatabase(dbPath);
-        }
+        
 
         private void SetupAdId()
         {

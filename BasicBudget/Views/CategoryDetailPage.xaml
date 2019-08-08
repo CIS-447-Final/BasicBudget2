@@ -111,8 +111,8 @@
                                 <Grid Margin="15,5,10,5">
 
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width=".10*"/>
-                                        <ColumnDefinition Width=".55*"/>
+                                        <ColumnDefinition Width=".15*"/>
+                                        <ColumnDefinition Width=".50*"/>
                                         <ColumnDefinition Width=".35*"/>
                                     </Grid.ColumnDefinitions>
 
@@ -179,7 +179,7 @@
                            MaxLength="15"/>
 
                     <views:ExtendedNumericEntry x:Name="ExpenseTotal" 
-                            Placeholder="Budget..." 
+                            Placeholder="Spent..." 
                            PlaceholderColor="{OnPlatform Android=White, iOS=DarkSlateGray}"
                            TextColor="{OnPlatform Android=White, iOS=Black}"
                             VerticalOptions="Center"

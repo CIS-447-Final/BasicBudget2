@@ -52,12 +52,12 @@ namespace BasicBudget
             analyticsManager.TrackScreen(ScreenName.ExpensePage);
 
             // Only load an ad once per time they open the app.
-            if (App.DisplayAd)
-            {
-                App.DisplayAd = false;
-                // Display an interstitial ad
-                await DependencyService.Get<IAdmobInterstitialAds>().LoadAd(App.AdId);
-            }
+            //if (App.DisplayAd)
+            //{
+            //    App.DisplayAd = false;
+            //    // Display an interstitial ad
+            //    await DependencyService.Get<IAdmobInterstitialAds>().LoadAd(App.AdId);
+            //}
         }
 
         void DisplayExpenseList(List<DBExpense> expenses = null)
